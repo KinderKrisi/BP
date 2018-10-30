@@ -41,5 +41,23 @@ namespace Repositories
                 return dummyUser;
             }
         }
+
+        public async Task<User> ChangePassword(ChangePasswordVM changePasswordVm)
+        {
+            var user = _context.Users.FirstOrDefault(x => changePasswordVm.UserId == x.Id);
+            if (user == null)
+            {
+                return null;
+            }
+
+            if (user.Password != changePasswordVm.OldPassword)
+            {
+                return null;
+            }
+
+            user.Password = changePasswordVm.NewPassword;
+            await _context.SaveChangesAsync();
+            return user;
+        }
     }
 }

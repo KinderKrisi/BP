@@ -20,7 +20,7 @@ namespace WebAPI.Controllers
         }
         // POST api/user
         [HttpPost("[action]")]
-        public async Task<ActionResult<User>> CreateUserAsync(UserVM newUser)
+        public async Task<ActionResult<User>> CreateUser(UserVM newUser)
         {
 
             var user = await _userRepository.CreateUser(newUser);
@@ -28,9 +28,16 @@ namespace WebAPI.Controllers
         }
 
         // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut("[action]")]
+        public async Task<ActionResult<User>> ChangePassword(ChangePasswordVM changePasswordVm)
         {
+            var user = _userRepository.ChangePassword(changePasswordVm);
+            if (user == null)
+            {
+                return BadRequest();
+            }
+
+            return Ok(user);
         }
 
         // DELETE api/values/5

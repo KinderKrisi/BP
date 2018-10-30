@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { UserService } from '../_services/_user/user.service';
+import { AuthService } from '../_services/_auth/auth.service';
 
 
 @Component({
@@ -17,7 +18,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
   private formBuilder: FormBuilder,
-  private userService: UserService,
+  private authService: AuthService,
   ) { }
 
   ngOnInit() {
@@ -42,6 +43,6 @@ export class LoginComponent implements OnInit {
   }
   login(email: string, password : string): void{
     console.log("login in prgress");
-    this.userService.login(email , password).subscribe();
+    this.authService.login(email , password).subscribe();
   }
 }
