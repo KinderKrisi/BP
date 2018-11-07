@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
-import { UserService } from '../_services/_user/user.service';
+import { MessageService } from 'primeng/components/common/messageservice';
+import { Router } from '@angular/router';
+import { AppComponent } from '../app.component';
+import { LoginVM } from '../_models/_viewModels/loginVM';
 import { AuthService } from '../_services/_auth/auth.service';
+
 
 
 @Component({
@@ -11,38 +13,44 @@ import { AuthService } from '../_services/_auth/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  loginForm: FormGroup;
+ 
+ /* loginForm: FormGroup;
   submitted = false;
   password: string;
-  email: string;
+  email: string;*/
 
-  constructor(
-  private formBuilder: FormBuilder,
-  private authService: AuthService,
+  loginVM: LoginVM = new LoginVM();
+  loading: boolean = false;
+
+  constructor(private authService: AuthService, 
+    private router: Router,
+    private appComponent : AppComponent 
   ) { }
 
   ngOnInit() {
-    this.loginForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
-    });
-  }
-  get f() { return this.loginForm.controls; }
-
-  onSubmit() {
-    this.submitted = true;
-
-    // stop here if form is invalid
-    if (this.loginForm.invalid) {
-      return;
+    this.loginVM.username = sessionStorage.getItem("username");
+    this.loginVM.password = sessionStorage.getItem("password");
+    if (this.loginVM.username && this.loginVM.password) {
+      this.login();
     }
-    this.password = this.loginForm.get('password').value;
-    this.email = this.loginForm.get("email").value;
-    console.log("login request", this.email, this.password);
-    this.login(this.email, this.password);
   }
-  login(email: string, password : string): void{
-    console.log("login in prgress");
-    this.authService.login(email , password).subscribe();
+  login() {
+    this.loading = true;
+    console.log("request send", this.loginVM)
+    this.authService.login(this.loginVM).subscribe(x => {
+      this.loading = false;
+      if (x.length > 0) {
+        sessionStorage.setItem("username", this.loginVM.username);
+        sessionStorage.setItem("password", this.loginVM.password);
+        this.authService.setUserProps(this.loginVM.username, this.loginVM.password);
+        if (this.authService.redirectUrl && this.authService.redirectUrl.length > 0) {
+          this.router.navigate([this.authService.redirectUrl]);
+        }
+        else {
+          this.router.navigate(["/home"]);
+        }
+      }
+    }, (err) => { this.loading = false; },
+      () => { this.loading = false });
   }
 }
