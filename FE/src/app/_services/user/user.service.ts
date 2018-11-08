@@ -5,7 +5,7 @@ import { map, catchError, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { User } from '../../_models/user';
 import { UserVM } from '../../_models/_viewModels/userVM';
-import { ToastService } from '../_toast/toast.service';
+import { ToastService } from '../toast/toast.service';
 import { ChangePasswordVM } from 'src/app/_models/_viewModels/changePasswordVM';
 
 @Injectable()

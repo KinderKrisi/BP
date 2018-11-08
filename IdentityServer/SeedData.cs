@@ -34,31 +34,31 @@ namespace IdentityServer
                     }
                 }
 
-                var st = userMgr.FindByEmailAsync("mk@m.com").Result;
-                if (st == null)
+                var mk = userMgr.FindByEmailAsync("mk@m.com").Result;
+                if (mk == null)
                 {
-                    st = new ApplicationUser
+                    mk = new ApplicationUser
                     {
                         UserName = "mk",
                         Email = "mk@m.com"
                     };
-                    var result = userMgr.CreateAsync(st, "123456").Result;
+                    var result = userMgr.CreateAsync(mk, "Martin123").Result;
                     if (!result.Succeeded)
                     {
                         throw new Exception(result.Errors.First().Description);
                     }
 
                     var type = Enum.GetName(typeof(AdminTypeEnum), AdminTypeEnum.Global);
-                    if (!userMgr.IsInRoleAsync(st, type).Result)
+                    if (!userMgr.IsInRoleAsync(mk, type).Result)
                     {
-                        result = userMgr.AddToRoleAsync(st, type).Result;
+                        result = userMgr.AddToRoleAsync(mk, type).Result;
                         if (!result.Succeeded)
                         {
                             throw new Exception(result.Errors.First().Description);
                         }
                     }
 
-                    result = userMgr.AddClaimsAsync(st, new Claim[]{
+                    result = userMgr.AddClaimsAsync(mk, new Claim[]{
                         new Claim(JwtClaimTypes.Name, "Martin Krisko"),
                         new Claim(JwtClaimTypes.GivenName, "Martin"),
                         new Claim(JwtClaimTypes.FamilyName, "Krisko"),
@@ -87,7 +87,7 @@ namespace IdentityServer
                         UserName = "dk",
                         Email = "dk@m.com"
                     };
-                    var result = userMgr.CreateAsync(dk, "123456").Result;
+                    var result = userMgr.CreateAsync(dk, "David123").Result;
                     if (!result.Succeeded)
                     {
                         throw new Exception(result.Errors.First().Description);

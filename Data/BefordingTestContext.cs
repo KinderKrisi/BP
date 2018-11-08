@@ -10,7 +10,8 @@ namespace Data
     public class BefordingTestContext : DbContext
     {
         public BefordingTestContext(DbContextOptions<BefordingTestContext> options) : base(options)
-        { }
+        {
+        }
 
         public DbSet<User> Users { get; set; }
 

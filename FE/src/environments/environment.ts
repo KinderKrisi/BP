@@ -5,9 +5,9 @@
 export const environment = {
   production: false,
   hmr: false,
-  apiUrl: 'https://localhost:44339/api/',
+  apiUrl: 'https://localhost:44302/api/',
   openIdConnectSettings: {
-    authority: 'https://localhost:44384/',
+    authority: 'https://localhost:44355/',
     client_id: 'testDataGeneratorClient',
     redirect_uri: 'https://localhost:4200/signin-oidc',
     scope: 'openid profile roles testDataGeneratorApi', //request additonal scopes by adding scope name, ex: testDataGeneratorApi

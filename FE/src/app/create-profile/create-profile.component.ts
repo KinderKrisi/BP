@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Profile } from 'selenium-webdriver/firefox';
 import { HospitalProfile } from '../_models/hospitalProfile';
 import { HospitalProfileVM } from '../_models/_viewModels/hospitalProfileVM';
-import { ProfileService } from '../_services/_profile/profile.service';
+import { ProfileService } from '../_services/profile/profile.service';
 import { User } from '../_models/user';
 
 @Component({

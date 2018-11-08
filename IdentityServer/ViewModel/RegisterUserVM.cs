@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace IdentityServer.ViewModel
 {
-    public class AddUserViewModel
+    public class RegisterUserVM
     {
         [Required]
         public string UserName { get; set; }

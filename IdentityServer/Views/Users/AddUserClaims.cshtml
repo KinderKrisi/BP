@@ -1,0 +1,85 @@
+﻿@model IdentityServer.ViewModel.UserClaimsVM
+
+@{
+    ViewData["Title"] = "AddUserClaim";
+}
+
+<h2>AddUserClaim</h2>
+
+<form method="post">
+
+    @*Could not find a way to pass a list, the model binder simply did not want to cooperate*@
+    <div class="form-group row">
+        <div class="col">
+            <label asp-for="@Model.NewClaimKey1" class="col-sm-2 col-form-label">Type</label>
+            <div class="col">
+                <input class="form-control" asp-for="@Model.NewClaimKey1" placeholder="Type" />
+            </div>
+        </div>
+        <div class="col">
+            <label asp-for="@Model.NewClaimValue1" class="col-sm-2 col-form-label">Value</label>
+            <div class="col">
+                <input asp-for="@Model.NewClaimValue1" class="form-control" placeholder="Value" />
+            </div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col">
+            <label asp-for="@Model.NewClaimKey2" class="col-sm-2 col-form-label">Type</label>
+            <div class="col">
+                <input class="form-control" asp-for="@Model.NewClaimKey2" placeholder="Type" />
+            </div>
+        </div>
+        <div class="col">
+            <label asp-for="@Model.NewClaimValue2" class="col-sm-2 col-form-label">Value</label>
+            <div class="col">
+                <input asp-for="@Model.NewClaimValue2" class="form-control" placeholder="Value" />
+            </div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col">
+            <label asp-for="@Model.NewClaimKey3" class="col-sm-2 col-form-label">Type</label>
+            <div class="col">
+                <input class="form-control" asp-for="@Model.NewClaimKey3" placeholder="Type" />
+            </div>
+        </div>
+        <div class="col">
+            <label asp-for="@Model.NewClaimValue3" class="col-sm-2 col-form-label">Value</label>
+            <div class="col">
+                <input asp-for="@Model.NewClaimValue3" class="form-control" placeholder="Value" />
+            </div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col">
+            <label asp-for="@Model.NewClaimKey4" class="col-sm-2 col-form-label">Type</label>
+            <div class="col">
+                <input class="form-control" asp-for="@Model.NewClaimKey4" placeholder="Type" />
+            </div>
+        </div>
+        <div class="col">
+            <label asp-for="@Model.NewClaimValue4" class="col-sm-2 col-form-label">Value</label>
+            <div class="col">
+                <input asp-for="@Model.NewClaimValue4" class="form-control" placeholder="Value" />
+            </div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col">
+            <label asp-for="@Model.NewClaimKey5" class="col-sm-2 col-form-label">Type</label>
+            <div class="col">
+                <input class="form-control" asp-for="@Model.NewClaimKey5" placeholder="Type" />
+            </div>
+        </div>
+        <div class="col">
+            <label asp-for="@Model.NewClaimValue5" class="col-sm-2 col-form-label">Value</label>
+            <div class="col">
+                <input asp-for="@Model.NewClaimValue5" class="form-control" placeholder="Value" />
+            </div>
+        </div>
+    </div>
+    <input type="submit" asp-action="AddUserClaims"
+           class="btn esh-basket-checkout"
+           value="Opret" name="action" />
+</form>

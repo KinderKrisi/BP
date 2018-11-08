@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Data;
 using Data.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Repositories.Interfaces;
@@ -32,6 +33,13 @@ namespace WebAPI.Controllers
             }
 
             return Ok(createdProfile);
+        }
+        [Authorize]
+        [HttpGet]
+        public IActionResult bla()
+        {
+            var list = new List<string>() { "Hello can you hear me I am server" };
+            return Ok(list);
         }
     }
 }

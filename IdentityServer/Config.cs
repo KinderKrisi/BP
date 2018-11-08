@@ -31,7 +31,7 @@ namespace IdentityServer
                 new TestUser
                 {
                     SubjectId = "c3b7f625-c07f-4d7d-9be1-ddff8ff93b4d",
-                    Username = "Sven",
+                    Username = "test2",
                     Password = "password",
                     Claims = new List<Claim>
                     {
@@ -63,8 +63,6 @@ namespace IdentityServer
                     "profile",
                     "given_name",
                     "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name",
-                    "section",
-                    "hospital",
                     "usertype"
                 }),
             };

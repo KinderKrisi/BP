@@ -1,0 +1,37 @@
+﻿@model IdentityServer.ViewModel.UsersVM
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Bruger administration</h2>
+
+<a style="font-size:2em" role="button" asp-action="AddUser" asp-controller="Users"> Opret ny bruger</a>
+
+<div class="row" style="margin-top:2em">
+    <div class="col">UserName</div>
+    <div class="col">Email</div>
+    <div class="col">Role</div>
+    <div class="col"></div>
+</div>
+
+@foreach (var item in Model.Users)
+{
+    <div class="row" style="margin-top:1em">
+        <div class="col">@item.ApplicationUser.UserName</div>
+        <div class="col">@item.ApplicationUser.Email</div>
+        <div class="col">@item.Roles</div>
+        <div class="col">
+            <div class="row">
+                <div class="col">
+                    <a asp-action="EditUserClaims" asp-controller="Users" asp-route-id="@item.ApplicationUser.Id" class="btn btn-primary">Edit claims</a>
+                </div>
+                <div class="col">
+                    <form method="post">
+                        <input type="submit" asp-action="DeleteTrialfinderUser" asp-route-id="@item.ApplicationUser.Id" class="btn btn-danger" value="Slet" />
+                    </form>
+                </div>
+            </div>
+            @*<a asp-action="DeleteTrialfinderUser" asp-controller="Users" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>*@
+        </div>
+    </div>
+}

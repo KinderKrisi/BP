@@ -81,7 +81,7 @@ namespace IdentityServer.Controllers
                 var applicationUser = new ApplicationUser();
                 applicationUser.Email = userVm.Email;
                 applicationUser.UserName = userVm.UserName;
-                var result = await _userManager.CreateAsync(applicationUser, "Nobly123123"); //Todo change to real pass
+                var result = await _userManager.CreateAsync(applicationUser, "132456"); //Todo change to real pass
                 if (result.Succeeded)
                 {
                     user = await _userManager.FindByIdAsync(applicationUser.Id);
@@ -106,8 +106,6 @@ namespace IdentityServer.Controllers
                         new List<Claim> {
                             new Claim(JwtClaimTypes.Email, user.Email),
                             new Claim("usertype",userVm.UserType),
-                            new Claim("hospital",userVm.Hospital),
-                            new Claim("section",userVm.Section)
                         });
                     if (!claimResult.Succeeded) return BadRequest("Error adding usertype and section to user");
                     //Todo: Confirmation mail

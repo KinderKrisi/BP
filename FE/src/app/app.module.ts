@@ -7,22 +7,25 @@ import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { UserUpdateComponent } from './user-update/user-update.component';
 import { CreateProfileComponent } from './create-profile/create-profile.component';
 import { AddAuthorizationHeaderInterceptorProvider } from './_interceptors/add-authorization-header.interceptor';
 import { AuthGuard } from './_guards/authGuard';
 import { OpenIdConnectService } from './_services/openIdConnect/open-id-connect.service';
-import { AuthService } from './_services/_auth/auth.service';
+import { SigninOidcComponent } from './signin-oidc/signin-oidc.component';
+import { HomeComponent } from './home/home.component';
+import { RedirectSilentRenewComponent } from './redirect-silent-renew/redirect-silent-renew.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
     RegisterComponent,
     UserUpdateComponent,
-    CreateProfileComponent
+    CreateProfileComponent,
+    SigninOidcComponent,
+    HomeComponent,
+    RedirectSilentRenewComponent
   ],
   imports: [
     BrowserModule,
@@ -32,10 +35,9 @@ import { AuthService } from './_services/_auth/auth.service';
     FormsModule
   ],
   providers: [
-    MessageService,
     AddAuthorizationHeaderInterceptorProvider,
+    MessageService,
     AuthGuard,
-    AuthService,
     OpenIdConnectService
   ],
   bootstrap: [AppComponent]

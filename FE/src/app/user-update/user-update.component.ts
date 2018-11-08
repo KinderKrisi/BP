@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserVM } from '../_models/_viewModels/userVM';
-import { UserService } from '../_services/_user/user.service';
+import { UserService } from '../_services/user/user.service';
 import { User } from '../_models/user';
 import { ChangePasswordVM } from '../_models/_viewModels/changePasswordVM';
 

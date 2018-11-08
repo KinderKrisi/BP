@@ -36,7 +36,7 @@ namespace IdentityServer
             var connectionString = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContextPool<IdentityServerDb>(options =>
             {
-                options.UseSqlServer(connectionString, dbOpts => dbOpts.MigrationsAssembly(typeof(Startup).Assembly.FullName));
+                options.UseSqlServer(connectionString);
             });
 
             services.AddCors(options =>
@@ -94,13 +94,18 @@ namespace IdentityServer
             {
                 app.UseDeveloperExceptionPage();
             }
-
-            app.Run(async (context) =>
+            else
             {
-                await context.Response.WriteAsync("/Home/Error");
-            });
+                app.Run(async (context) =>
+                {
+                    await context.Response.WriteAsync("/Home/Error");
+                });
+            }
 
             app.UseCors("default");
+            /*app.UseCors(options => options.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader()
+    .AllowCredentials());
+    */
             app.UseStaticFiles();
 
             app.UseIdentityServer();

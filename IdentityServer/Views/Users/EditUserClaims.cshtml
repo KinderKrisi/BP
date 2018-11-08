@@ -1,0 +1,32 @@
+﻿@using System.Security.Claims;
+@model IdentityServer.ViewModel.UserClaimsVM
+
+@{
+    ViewData["Title"] = "EditUserClaims";
+}
+
+<h2>EditUserClaims</h2>
+
+<a style="font-size:2em" role="button" asp-action="AddUserClaims" asp-controller="Users" asp-route-id="@Model.UserID"> Add more claims</a>
+
+<div class="row" style="margin-top:2em">
+    <div class="col">Type</div>
+    <div class="col">Value</div>
+    <div class="col"></div>
+</div>
+
+@foreach (var item in Model.Claims)
+{
+    <div class="row" style="margin-top:1em">
+        <div class="col">@item.Type</div>
+        <div class="col">@item.Value</div>
+        <div class="col">
+            <form method="post">
+                <input type="hidden" name="type" asp-for="@item.Type" />
+                <input type="hidden" name="value" asp-for="@item.Value" />
+                <input type="submit" asp-controller="Users" asp-action="DeleteUserClaim" asp-route-id="@Model.UserID"
+                       class="btn btn-danger" value="Slet" />
+            </form>
+        </div>
+    </div>
+}
