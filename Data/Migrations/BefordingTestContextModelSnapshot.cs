@@ -31,37 +31,11 @@ namespace Data.Migrations
 
                     b.Property<float>("Rate");
 
-                    b.Property<int?>("UserId");
+                    b.Property<string>("UserId");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Profiles");
-                });
-
-            modelBuilder.Entity("Data.User", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Email");
-
-                    b.Property<string>("Password");
-
-                    b.Property<string>("Role");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("Data.HospitalProfile", b =>
-                {
-                    b.HasOne("Data.User", "User")
-                        .WithMany("Profiles")
-                        .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618
         }

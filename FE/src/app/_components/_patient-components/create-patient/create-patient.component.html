@@ -1,0 +1,23 @@
+
+<div class="container ui-g ui-fluid">
+    <div class="ui-g-12 ui-md-4">
+      <form protocolForm="ngForm" (ngSubmit)="onSubmit()" autocomplete="off">
+          <div class="ui-inputgroup ui-g-12">
+              <span class="ui-inputgroup-addon">
+                <i class="fa fa-signature"></i>
+              </span>
+          <input type="text" name="name"  pInputText placeholder="Name of patient" [(ngModel)]="newPatient.name" required/>
+            </div>
+        <div class="ui-inputgroup ui-g-12">
+          <span class="ui-inputgroup-addon">
+            <i class="fa fa-home"></i>
+          </span>
+          <input type="text" name="address" placeholder="Address" [(ngModel)]="newPatient.address" required/>
+        </div>   
+        <div class="ui-inputgroup ui-g-12">
+          <button pButton type="button" [disabled]="loading" class="ui-button-raised ui-button-rounded" label="Create"
+            (click)="onSubmit($event)"></button>
+        </div>
+      </form>
+      </div>
+    </div>

@@ -3,9 +3,9 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Bruger administration</h2>
+<h2>User administration</h2>
 
-<a style="font-size:2em" role="button" asp-action="AddUser" asp-controller="Users"> Opret ny bruger</a>
+<a style="font-size:2em" role="button" asp-action="AddUser" asp-controller="Users"> Add User</a>
 
 <div class="row" style="margin-top:2em">
     <div class="col">UserName</div>
@@ -27,11 +27,10 @@
                 </div>
                 <div class="col">
                     <form method="post">
-                        <input type="submit" asp-action="DeleteTrialfinderUser" asp-route-id="@item.ApplicationUser.Id" class="btn btn-danger" value="Slet" />
+                        <input type="submit" asp-action="DeleteUser" asp-route-id="@item.ApplicationUser.Id" class="btn btn-danger" value="Delete" />
                     </form>
                 </div>
             </div>
-            @*<a asp-action="DeleteTrialfinderUser" asp-controller="Users" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>*@
         </div>
     </div>
 }

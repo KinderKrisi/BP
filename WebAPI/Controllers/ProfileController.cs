@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Repositories.Interfaces;
+using Services.IdentityServer;
 
 namespace WebAPI.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ProfileController : ControllerBase
@@ -34,12 +36,48 @@ namespace WebAPI.Controllers
 
             return Ok(createdProfile);
         }
-        [Authorize]
-        [HttpGet]
-        public IActionResult bla()
+        [HttpGet("[action]")]
+        public async Task<ActionResult<HospitalProfile[]>> GetProfilesForUser()
         {
-            var list = new List<string>() { "Hello can you hear me I am server" };
-            return Ok(list);
+            var result = await _repository.GetProfilesForUser();
+            if(result == null)
+            {
+                return BadRequest();
+            }
+            return Ok(result);
+        }
+        [Authorize(Roles = "Regular, Super, Global")]
+        [HttpGet("[action]")]
+        public async Task<ActionResult<HospitalProfile[]>> GetAllProfiles()
+        {
+            var result = await _repository.GetAllProfiles();
+            if (result == null)
+            {
+                return BadRequest();
+            }
+            return Ok(result);
+        }
+
+        [HttpDelete("[action]/{id}")]
+        public async Task<ActionResult> DeleteProfile(int id)
+        {
+            bool deleted = await _repository.DeleteProfile(id);
+            if(!deleted)
+            {
+                return BadRequest();
+            }
+            return Ok();
+        }
+        [Authorize(Roles = "Regular, Super, Global")]
+        [HttpDelete("[action]/{id}")]
+        public async Task<ActionResult> DeleteProfilesAdmin(int id)
+        {
+            bool deleted = await _repository.DeleteProfile(id);
+            if (!deleted)
+            {
+                return BadRequest();
+            }
+            return Ok();
         }
     }
 }

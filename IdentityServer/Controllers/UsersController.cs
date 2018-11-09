@@ -52,7 +52,7 @@ namespace IdentityServer.Controllers
 
         public async Task<IActionResult> AddUser()
         {
-            var vm = new AddUserViewModel();
+            var vm = new RegisterUserVM();
             vm.AdminTypes = new List<SelectListItem>()
             {
             new SelectListItem { Value = AdminTypeEnum.None.ToString(), Text = "None" },
@@ -68,7 +68,7 @@ namespace IdentityServer.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddUser(AddUserViewModel userVm)
+        public async Task<IActionResult> AddUser(RegisterUserVM userVm)
         {
             if (!ModelState.IsValid)
             {
@@ -81,7 +81,7 @@ namespace IdentityServer.Controllers
                 var applicationUser = new ApplicationUser();
                 applicationUser.Email = userVm.Email;
                 applicationUser.UserName = userVm.UserName;
-                var result = await _userManager.CreateAsync(applicationUser, "132456"); //Todo change to real pass
+                var result = await _userManager.CreateAsync(applicationUser, "Test123"); //Todo change to real pass
                 if (result.Succeeded)
                 {
                     user = await _userManager.FindByIdAsync(applicationUser.Id);
@@ -200,7 +200,7 @@ namespace IdentityServer.Controllers
 
         // DELETE: api/TrialfinderUsers/5
         [HttpPost("[action]/{id}")]
-        public async Task<IActionResult> DeleteTrialfinderUser([FromRoute] string id)
+        public async Task<IActionResult> DeleteUser([FromRoute] string id)
         {
             if (!ModelState.IsValid)
             {

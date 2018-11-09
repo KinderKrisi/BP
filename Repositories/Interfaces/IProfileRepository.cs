@@ -10,5 +10,9 @@ namespace Repositories.Interfaces
     public interface IProfileRepository
     {
         Task<HospitalProfile> CreateProfile(HospitalProfileVM newProfileVm);
+        Task<IEnumerable<HospitalProfile>> GetProfilesForUser();
+        Task<IEnumerable<HospitalProfile>> GetAllProfiles();
+        Task<bool> DeleteProfile(int id);
+        Task<bool> DeleteProfileAdmin(int id);
     }
 }

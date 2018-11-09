@@ -17,8 +17,6 @@ namespace IdentityServer.ViewModel
         [Display(Name = "Email Address")]
         public string Email { get; set; }
         [Required]
-        public string Section { get; set; }
-        [Required]
         public string UserType { get; set; }
         public List<SelectListItem> UserTypes { get; } = new List<SelectListItem>
         {
@@ -27,7 +25,5 @@ namespace IdentityServer.ViewModel
         [Required]
         public string AdminType { get; set; }
         public List<SelectListItem> AdminTypes { get; set; } = new List<SelectListItem>();
-        [Required]
-        public string Hospital { get; set; }
     }
 }

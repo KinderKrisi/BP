@@ -14,13 +14,13 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
-using WebAPI.Authorization;
 using Services.IdentityServer;
 using IdentityServer4.AccessTokenValidation;
 using WebAPI.Models;
 using Microsoft.AspNetCore.Http;
 using Repositories.Interfaces;
 using Repositories;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace WebAPI
 {
@@ -71,6 +71,7 @@ namespace WebAPI
         options.Authority = _identityConfiguration.Authority;
         options.ApiName = _identityConfiguration.ApiName;
     });
+            /*
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("UserMustBeAdministrator", policyBuilder =>
@@ -87,12 +88,14 @@ namespace WebAPI
                          new UserMustBeAdministratorRequirement("Administrator"));
                    });
             });
-
+            
             services.AddScoped<IAuthorizationHandler, UserMustBeAdministratorRequirementHandler>();
+            */
             services.AddScoped<IUserInfoService, UserInfoService>();
+            services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddTransient<IProfileRepository, ProfileRepository>();
-            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IPatientRepository, PatientRepository>();
 
         }
 
@@ -109,7 +112,6 @@ namespace WebAPI
             }
 
             app.UseCors("default");
-            app.UseMaintainCorsHeaders();
 
             app.UseAuthentication();
             app.UseHttpsRedirection();
@@ -117,70 +119,4 @@ namespace WebAPI
         }
     }
 
-    public static class MaintainCorsHeadersExtensions
-    {
-        /// <summary>
-        /// Ensure all CORS headers remain or else add them back in ...
-        /// </summary>
-        /// <param name="builder"></param>
-        /// <returns></returns>
-        public static IApplicationBuilder UseMaintainCorsHeaders(this IApplicationBuilder builder)
-        {
-            if (builder == null)
-            {
-                throw new ArgumentNullException(nameof(builder));
-            }
-
-            return builder.UseMiddleware<MaintainCorsHeadersMiddleware>();
-        }
-
-    }
-    public class MaintainCorsHeadersMiddleware
-    {
-        private readonly RequestDelegate _next;
-
-        static MaintainCorsHeadersMiddleware()
-        {
-
-        }
-
-        public MaintainCorsHeadersMiddleware(RequestDelegate next)
-        {
-            _next = next;
-        }
-
-        public async Task Invoke(HttpContext httpContext)
-        {
-            // Find and hold onto any CORS related headers ...
-            var corsHeaders = new HeaderDictionary();
-            foreach (var pair in httpContext.Response.Headers)
-            {
-                if (!pair.Key.StartsWith("access-control-", StringComparison.OrdinalIgnoreCase))
-                {
-                    continue; // Not CORS related
-                }
-                corsHeaders[pair.Key] = pair.Value;
-            }
-
-            // Bind to the OnStarting event so that we can make sure these CORS headers are still included going to the client
-            httpContext.Response.OnStarting(o =>
-            {
-                var ctx = (HttpContext)o;
-                var headers = ctx.Response.Headers;
-                // Ensure all CORS headers remain or else add them back in ...
-                foreach (var pair in corsHeaders)
-                {
-                    if (headers.ContainsKey(pair.Key))
-                    {
-                        continue; // Still there!
-                    }
-                    headers.Add(pair.Key, pair.Value);
-                }
-                return Task.CompletedTask;
-            }, httpContext);
-
-            // Call the pipeline ...
-            await _next(httpContext);
-        }
-    }
 }

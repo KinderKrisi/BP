@@ -1,9 +1,8 @@
-import { User } from "./user";
 
 export class HospitalProfile{
+    id: number;
     nameOfHospital : string;
     address : string;
     rate : number;
-    user : User;
-    id: number;
+    userId: string;
 }

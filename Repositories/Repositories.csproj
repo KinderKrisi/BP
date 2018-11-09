@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Data\Data.csproj" />
+    <ProjectReference Include="..\Services.IdentityServer\Services.IdentityServer.csproj" />
   </ItemGroup>
 
 </Project>
