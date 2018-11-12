@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Repositories.Interfaces;
+using Nobly.Extensions.ModelStateDictionary;
+
 
 namespace WebAPI.Controllers
 {
@@ -33,9 +35,11 @@ namespace WebAPI.Controllers
             var userPatientList = await _repository.GetAllPatientsForUser();
             if(userPatientList == null)
             {
-                return BadRequest();
+                ModelState.AddErrorMessage("Unable to get data");
+                return BadRequest(ModelState);
             }
             return Ok(userPatientList);
+            
         }
 
         [HttpPost("[action]")]
@@ -50,7 +54,8 @@ namespace WebAPI.Controllers
 
             if(newPatient == null)
             {
-                return BadRequest();
+                ModelState.AddErrorMessage("Unable to create Patient");
+                return BadRequest(ModelState);
             }
             return Ok(newPatient);
         }
@@ -66,7 +71,8 @@ namespace WebAPI.Controllers
 
             if(userPatientListAdmin == null)
             {
-                return BadRequest();
+                ModelState.AddErrorMessage("Unable to get data");
+                return BadRequest(ModelState);
             }
             return Ok(userPatientListAdmin);
         }

@@ -62,15 +62,17 @@ namespace WebAPI
                 options.SerializerSettings.PreserveReferencesHandling = PreserveReferencesHandling.None;
             });
 
+            var connectionString = Configuration.GetConnectionString("DefaultConnection");
+
             services.AddDbContext<BefordingTestContext>(opt =>
-                opt.UseSqlServer("Data Source=localhost;Initial Catalog=BefordingTestDb;Integrated Security=True;"));
+                opt.UseSqlServer(connectionString));
 
             services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
                  .AddIdentityServerAuthentication(options =>
-    {
-        options.Authority = _identityConfiguration.Authority;
-        options.ApiName = _identityConfiguration.ApiName;
-    });
+                 {
+                    options.Authority = _identityConfiguration.Authority;
+                    options.ApiName = _identityConfiguration.ApiName;
+                 });
             /*
             services.AddAuthorization(options =>
             {
@@ -96,6 +98,7 @@ namespace WebAPI
 
             services.AddTransient<IProfileRepository, ProfileRepository>();
             services.AddTransient<IPatientRepository, PatientRepository>();
+            services.AddTransient<ILogRepository, LogRepository>();
 
         }
 

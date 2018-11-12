@@ -15,5 +15,6 @@ namespace Data
 
         public DbSet<HospitalProfile> Profiles { get; set; }
         public DbSet<Patient> Patients { get; set; }
+        public DbSet<Log> Logs { get; set; }
     }
 }

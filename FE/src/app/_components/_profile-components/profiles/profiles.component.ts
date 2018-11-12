@@ -27,7 +27,7 @@ export class ProfilesComponent implements OnInit {
   }
 
   getAllProfiles() : void {
-    this.profileService.getAllProfiles().subscribe(x => this.allProfileList = x)
+    this.profileService.getAllProfilesAdmin().subscribe(x => this.allProfileList = x)
   }
   navigateToDetail(id: number) : void {
     this.router.navigate(['/profile', id]);

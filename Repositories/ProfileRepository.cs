@@ -15,37 +15,71 @@ namespace Repositories
     {
         private readonly BefordingTestContext _context;
         private readonly IUserInfoService _userInfoService;
+        private readonly ILogRepository _logRepository;
 
-        public ProfileRepository(BefordingTestContext context, IUserInfoService userInfoService)
+        private string UserId;
+
+        public ProfileRepository(BefordingTestContext context, IUserInfoService userInfoService, ILogRepository logRepository)
         {
             _context = context;
             _userInfoService = userInfoService;
+            _logRepository = logRepository;
+
+
+            UserId = _userInfoService.UserId;
+
         }
         public async Task<HospitalProfile> CreateProfile(HospitalProfileVM newProfileVm)
         {
-            string userId = _userInfoService.UserId;
             var dummyProfile = new HospitalProfile()
             {
-                UserId = userId,
+                UserId = UserId,
                 NameOfHospital = newProfileVm.NameOfHospital,
                 Address =  newProfileVm.Address,
                 Rate = newProfileVm.Rate
             };
-            _context.Profiles.Add(dummyProfile);
-           await _context.SaveChangesAsync();
+            try
+            {
+                _context.Profiles.Add(dummyProfile);
+                await _context.SaveChangesAsync();
 
+            }
+            catch (Exception ex)
+            {
+                var newLog = new Log()
+                {
+                    Severity = "Error",
+                    Message = ex.Message,
+                    UserId = UserId,
+                    TimeOfOccurrence = DateTime.Now
+                };
+                await _logRepository.AddLog(newLog);
+            }
             return dummyProfile;
         }
 
         public async Task<bool> DeleteProfile(int id)
         {
-            string userId = _userInfoService.UserId;
-            var profile = await _context.Profiles.FirstOrDefaultAsync(x => x.UserId == userId && x.Id == id);
+            var profile = await _context.Profiles.FirstOrDefaultAsync(x => x.UserId == UserId && x.Id == id);
             if (profile != null)
             {
-                _context.Remove(profile);
-                await _context.SaveChangesAsync();
-                return true;
+                try
+                {
+                    _context.Remove(profile);
+                    await _context.SaveChangesAsync();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    var newLog = new Log()
+                    {
+                        Severity = "Error",
+                        Message = ex.Message,
+                        UserId = UserId,
+                        TimeOfOccurrence = DateTime.Now
+                    };
+                    await _logRepository.AddLog(newLog);
+                }
             }
             return false;
         }
@@ -55,25 +89,71 @@ namespace Repositories
             var profile = await _context.Profiles.FirstOrDefaultAsync(x => x.Id == id);
             if (profile != null)
             {
-                _context.Remove(profile);
-                await _context.SaveChangesAsync();
-                return true;
+                try
+                {
+                    _context.Remove(profile);
+                    await _context.SaveChangesAsync();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    var newLog = new Log()
+                    {
+                        Severity = "Error",
+                        Message = ex.Message,
+                        UserId = UserId,
+                        TimeOfOccurrence = DateTime.Now
+                    };
+                    await _logRepository.AddLog(newLog);
+                    return false;
+                }
             }
             return false;
         }
 
         public async Task<IEnumerable<HospitalProfile>> GetAllProfiles()
         {
-            var result = await _context.Profiles.OrderBy(x => x.UserId).ToListAsync();
-            return result;
+            try
+            {
+                var result = await _context.Profiles.OrderBy(x => x.UserId).ToListAsync();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                var newLog = new Log()
+                {
+                    Severity = "Error",
+                    Message = ex.Message,
+                    UserId = UserId,
+                    TimeOfOccurrence = DateTime.Now
+                };
+                await _logRepository.AddLog(newLog);
+
+                return null;
+            }
+
         }
 
         public async Task<IEnumerable<HospitalProfile>> GetProfilesForUser()
         {
-            var userId = _userInfoService.UserId;
-            var userProfileList = await _context.Profiles.Where(x => x.UserId == userId).ToListAsync();
+            try
+            {
+                var userProfileList = await _context.Profiles.Where(x => x.UserId == UserId).ToListAsync();
+                return userProfileList;
+            }
+            catch (Exception ex)
+            {
+                var newLog = new Log()
+                {
+                    Severity = "Error",
+                    Message = ex.Message,
+                    UserId = UserId,
+                    TimeOfOccurrence = DateTime.Now
+                };
+                await _logRepository.AddLog(newLog);
 
-            return userProfileList;
+                return null;
+            }
         }
     }
 }

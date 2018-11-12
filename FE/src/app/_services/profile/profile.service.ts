@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { map, catchError, finalize } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { ToastService } from '../toast/toast.service';
 import { HospitalProfileVM } from 'src/app/_models/_viewModels/hospitalProfileVM';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { HospitalProfile } from 'src/app/_models/hospitalProfile';
 import { tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';

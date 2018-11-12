@@ -9,16 +9,11 @@ import { OpenIdConnectService } from '../../_services/openIdConnect/open-id-conn
 })
 export class HomeComponent implements OnInit {
 
-  isLoggedIn: boolean = false;
-  constructor(private openIdConnectService: OpenIdConnectService) { }
+
+  constructor() { }
 
   ngOnInit() {
-    this.isLoggedIn = this.openIdConnectService.userAvailable;
-    console.log(this.isLoggedIn)
-  }
 
-  logout() {
-    this.openIdConnectService.triggerSignOut();
   }
 
 }

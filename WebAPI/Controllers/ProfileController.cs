@@ -8,7 +8,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Repositories.Interfaces;
-using Services.IdentityServer;
+using Nobly.Extensions.ModelStateDictionary;
+
 
 namespace WebAPI.Controllers
 {
@@ -36,7 +37,8 @@ namespace WebAPI.Controllers
 
             if (createdProfile == null)
             {
-                return BadRequest();
+                ModelState.AddErrorMessage("Unable to create profile");
+                return BadRequest(ModelState);
             }
 
             return Ok(createdProfile);
@@ -48,7 +50,8 @@ namespace WebAPI.Controllers
             var result = await _repository.GetProfilesForUser();
             if(result == null)
             {
-                return BadRequest();
+                ModelState.AddErrorMessage("Unable to get profiles for user");
+                return BadRequest(ModelState);
             }
             return Ok(result);
         }
@@ -59,7 +62,8 @@ namespace WebAPI.Controllers
             var result = await _repository.GetAllProfiles();
             if (result == null)
             {
-                return BadRequest();
+                ModelState.AddErrorMessage("Unable to get all profiles");
+                return BadRequest(ModelState);
             }
             return Ok(result);
         }
@@ -74,7 +78,8 @@ namespace WebAPI.Controllers
             bool deleted = await _repository.DeleteProfile(id);
             if(!deleted)
             {
-                return BadRequest();
+                ModelState.AddErrorMessage("Unable to delete profile");
+                return BadRequest(ModelState);
             }
             return Ok();
         }
@@ -90,7 +95,8 @@ namespace WebAPI.Controllers
             bool deleted = await _repository.DeleteProfileAdmin(id);
             if (!deleted)
             {
-                return BadRequest();
+                ModelState.AddErrorMessage("Unable to delete profile");
+                return BadRequest(ModelState);
             }
             return Ok();
         }

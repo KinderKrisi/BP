@@ -15,41 +15,88 @@ namespace Repositories
     {
         private readonly BefordingTestContext _context;
         private readonly IUserInfoService _userInfoService;
+        private readonly ILogRepository _logRepository;
 
-        public PatientRepository(BefordingTestContext context, IUserInfoService userInfoService)
+        private string UserId;
+
+        public PatientRepository(BefordingTestContext context, IUserInfoService userInfoService, ILogRepository logRepository)
         {
             _context = context;
             _userInfoService = userInfoService;
+            _logRepository = logRepository;
+
+            UserId = _userInfoService.UserId;
         }
 
         public async Task<Patient> CreatePatient(PatientVM newPatientVM)
         {
-            string userId = _userInfoService.UserId;
             var dummyPatient = new Patient()
             {
-                UserId = userId,
+                UserId = UserId,
                 Address = newPatientVM.Address,
                 Name = newPatientVM.Name
             };
-            _context.Patients.Add(dummyPatient);
-            await _context.SaveChangesAsync();
-
-            return dummyPatient;
+            try
+            {
+                _context.Patients.Add(dummyPatient);
+                await _context.SaveChangesAsync();
+                return dummyPatient;
+            }
+            catch(Exception ex)
+            {
+                var newLog = new Log()
+                {
+                    Severity = "Error",
+                    Message = ex.Message,
+                    UserId = UserId,
+                    TimeOfOccurrence = DateTime.Now
+                };
+                await _logRepository.AddLog(newLog);
+                return null;
+            }
+            
         }
 
         public async Task<IEnumerable<Patient>> GetAllPatientsForUser()
         {
-            string userId = _userInfoService.UserId;
-            var userPatientList = await _context.Patients.Where(x => x.UserId == userId).ToListAsync();
-
-            return userPatientList;
+            try
+            {
+                var userPatientList  = await _context.Patients.Where(x => x.UserId == UserId).ToListAsync();
+                return userPatientList;
+            }
+            catch (Exception ex)
+            {
+                var newLog = new Log()
+                {
+                    Severity = "Error",
+                    Message = ex.Message,
+                    UserId = UserId,
+                    TimeOfOccurrence = DateTime.Now
+                };
+                await _logRepository.AddLog(newLog);
+                return null;
+            }
         }
 
         public async Task<IEnumerable<Patient>> GetAllUserPatientsAdmin(string userId)
         {
-            var userPatientListAdmin = await _context.Patients.Where(x => x.UserId == userId).ToListAsync();
-
-            return userPatientListAdmin;
+            try
+            {
+               var userPatientListAdmin = await _context.Patients.Where(x => x.UserId == userId).ToListAsync();
+                return userPatientListAdmin;
+            }
+            catch (Exception ex)
+            {
+                var newLog = new Log()
+                {
+                    Severity = "Error",
+                    Message = ex.Message,
+                    UserId = UserId,
+                    TimeOfOccurrence = DateTime.Now
+                };
+                await _logRepository.AddLog(newLog);
+                return null;
+            }
         }
     }
 }
