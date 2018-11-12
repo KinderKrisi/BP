@@ -17,12 +17,16 @@ export class PatientService {
   constructor(private dataService: DataService, private http: HttpClient) { }
 
   getAllPatientsForUser() : Observable<Patient[]> {
-    return this.http.get<Patient[]>(this.patientUrl + "/GetAllPatientsForUser", {withCredentials: true}).pipe(
+    return this.http.get<Patient[]>(this.patientUrl + "/GetAllPatientsForUser").pipe(
       tap(result => this.dataService.patientSetUserPatientList(result))
     )
   }
+  getAllUserPatientsAdmin(userId: string) : Observable<Patient[]> {
+    return this.http.get<Patient[]>(this.patientUrl + `/GetAllUserPatientsAdmin/${userId}`)
+  }
+
   createPatient(patient: PatientVM) : Observable<Patient> {
-    return this.http.post<Patient>(this.patientUrl + "/CreatePatient", patient, {withCredentials: true}).pipe(
+    return this.http.post<Patient>(this.patientUrl + "/CreatePatient", patient).pipe(
       tap(newPatient => this.dataService.patientPushToUserPatientList(newPatient))
     )
     }

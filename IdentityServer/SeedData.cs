@@ -21,20 +21,20 @@ namespace IdentityServer
                 var context = scope.ServiceProvider.GetService<IdentityServerDb>();
                 //context.Database.Migrate(); //comment this if you don't want to have the latest migration
 
-                var userMgr = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-                var roleMgr = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+                var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+                var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
                 foreach (var roleType in Enum.GetValues(typeof(AdminTypeEnum)))
                 {
                     var roleName = roleType.ToString();
-                    var role = roleMgr.FindByNameAsync(roleName).Result;
+                    var role = roleManager.FindByNameAsync(roleName).Result;
                     if (role == null)
                     {
-                        var result = roleMgr.CreateAsync(new IdentityRole(roleName)).Result;
+                        var result = roleManager.CreateAsync(new IdentityRole(roleName)).Result;
                     }
                 }
 
-                var mk = userMgr.FindByEmailAsync("mk@m.com").Result;
+                var mk = userManager.FindByEmailAsync("mk@m.com").Result;
                 if (mk == null)
                 {
                     mk = new ApplicationUser
@@ -42,29 +42,31 @@ namespace IdentityServer
                         UserName = "mk",
                         Email = "mk@m.com"
                     };
-                    var result = userMgr.CreateAsync(mk, "Martin123").Result;
+                    var result = userManager.CreateAsync(mk, "Martin123").Result;
                     if (!result.Succeeded)
                     {
                         throw new Exception(result.Errors.First().Description);
                     }
 
                     var type = Enum.GetName(typeof(AdminTypeEnum), AdminTypeEnum.Global);
-                    if (!userMgr.IsInRoleAsync(mk, type).Result)
+                    if (!userManager.IsInRoleAsync(mk, type).Result)
                     {
-                        result = userMgr.AddToRoleAsync(mk, type).Result;
+                        result = userManager.AddToRoleAsync(mk, type).Result;
                         if (!result.Succeeded)
                         {
                             throw new Exception(result.Errors.First().Description);
                         }
                     }
 
-                    result = userMgr.AddClaimsAsync(mk, new Claim[]{
+                    result = userManager.AddClaimsAsync(mk, new Claim[]{
                         new Claim(JwtClaimTypes.Name, "Martin Krisko"),
                         new Claim(JwtClaimTypes.GivenName, "Martin"),
                         new Claim(JwtClaimTypes.FamilyName, "Krisko"),
                         new Claim(JwtClaimTypes.Email, "mk@m.com"),
                         new Claim(JwtClaimTypes.EmailVerified, "true", ClaimValueTypes.Boolean),
-                        new Claim(JwtClaimTypes.Address, @"{ 'street_address': 'CLaus Cortens Gade 5', 'locality': 'Horsens', 'postal_code': 8700, 'country': 'Denmark' }", IdentityServer4.IdentityServerConstants.ClaimValueTypes.Json),
+                        new Claim(JwtClaimTypes.Address, 
+                        @"{ 'street_address': 'CLaus Cortens Gade 5', 'locality': 'Horsens', 'postal_code': 8700, 'country': 'Denmark' }",
+                        IdentityServer4.IdentityServerConstants.ClaimValueTypes.Json),
                         new Claim("location", "Horsens"),
                     }).Result;
                     if (!result.Succeeded)
@@ -79,7 +81,7 @@ namespace IdentityServer
                     Console.WriteLine("user with e-mail mk@m.com already exists");
                 }
 
-                var dk = userMgr.FindByEmailAsync("dk@m.com").Result;
+                var dk = userManager.FindByEmailAsync("dk@m.com").Result;
                 if (dk == null)
                 {
                     dk = new ApplicationUser
@@ -87,30 +89,30 @@ namespace IdentityServer
                         UserName = "dk",
                         Email = "dk@m.com"
                     };
-                    var result = userMgr.CreateAsync(dk, "David123").Result;
+                    var result = userManager.CreateAsync(dk, "David123").Result;
                     if (!result.Succeeded)
                     {
                         throw new Exception(result.Errors.First().Description);
                     }
 
                     var type = Enum.GetName(typeof(AdminTypeEnum), AdminTypeEnum.Global);
-                    if (!userMgr.IsInRoleAsync(dk, type).Result)
+                    if (!userManager.IsInRoleAsync(dk, type).Result)
                     {
-                        result = userMgr.AddToRoleAsync(dk, type).Result;
+                        result = userManager.AddToRoleAsync(dk, type).Result;
                         if (!result.Succeeded)
                         {
                             throw new Exception(result.Errors.First().Description);
                         }
                     }
-
-
-                    result = userMgr.AddClaimsAsync(dk, new Claim[]{
+                    result = userManager.AddClaimsAsync(dk, new Claim[]{
                         new Claim(JwtClaimTypes.Name, "David Kuts"),
                         new Claim(JwtClaimTypes.GivenName, "David"),
                         new Claim(JwtClaimTypes.FamilyName, "Kuts"),
                         new Claim(JwtClaimTypes.Email, "dk@m.com"),
                         new Claim(JwtClaimTypes.EmailVerified, "true", ClaimValueTypes.Boolean),
-                        new Claim(JwtClaimTypes.Address, @"{ 'street_address': 'Chr M Østergaards Vej 1A', 'locality': 'Horsens', 'postal_code': 8700, 'country': 'Denmark' }", IdentityServer4.IdentityServerConstants.ClaimValueTypes.Json),
+                        new Claim(JwtClaimTypes.Address,
+                        @"{ 'street_address': 'Chr M Østergaards Vej 1A', 'locality': 'Horsens', 'postal_code': 8700, 'country': 'Denmark' }",
+                        IdentityServer4.IdentityServerConstants.ClaimValueTypes.Json),
                         new Claim("location", "Horsens"),
                     }).Result;
                     if (!result.Succeeded)

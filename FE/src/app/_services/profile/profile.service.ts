@@ -19,21 +19,24 @@ export class ProfileService {
   constructor(private http:HttpClient, private toastService: ToastService, private dataService: DataService) { }
 
   createProfile(createProfile : HospitalProfileVM) : Observable<HospitalProfile> {
-    return this.http.post<HospitalProfile>(this.profileUrl + "/CreateProfile", createProfile, {withCredentials: true}).pipe(
+    return this.http.post<HospitalProfile>(this.profileUrl + "/CreateProfile", createProfile).pipe(
       tap(newProfile => this.dataService.profilePushToUserProfileList(newProfile))
     )
   }
   getProfilesForUser() : Observable<HospitalProfile[]>{
-    return this.http.get<HospitalProfile[]>(this.profileUrl + "/GetProfilesForUser", {withCredentials: true})
+    return this.http.get<HospitalProfile[]>(this.profileUrl + "/GetProfilesForUser")
     .pipe(tap(userProfileList => this.dataService.profileSetUserProfileList(userProfileList)))
     
   }
-  getAllProfiles() : Observable<HospitalProfile[]>{
-    return this.http.get<HospitalProfile[]>(this.profileUrl + "/GetAllProfiles", {withCredentials: true})
+  getAllProfilesAdmin() : Observable<HospitalProfile[]>{
+    return this.http.get<HospitalProfile[]>(this.profileUrl + "/GetAllProfiles")
   }
   deleteProfile(id: number) : Observable<void> {
-    return this.http.delete<void>(this.profileUrl + `/DeleteProfile/${id}`, {withCredentials: true}).pipe(
+    return this.http.delete<void>(this.profileUrl + `/DeleteProfile/${id}`).pipe(
       tap(() => this.dataService.profileDeleteProfileFromList(id))
     )
+  }
+  deleteProfileAdmin(id: number) : Observable<void> {
+    return this.http.delete<void>(this.profileUrl + `/DeleteProfileAdmin/${id}`)
   }
 }

@@ -14,8 +14,8 @@ using System.Threading.Tasks;
 
 
 namespace IdentityServer.Controllers
-{
-    [Authorize(Policy = "UserMustBeSuperAdministrator")]
+{ 
+    [Authorize(Roles = "Super, Global")]
     public class UsersController : Controller
     {
         private readonly IdentityServerDb _context;
@@ -198,7 +198,6 @@ namespace IdentityServer.Controllers
             return RedirectToAction("EditUserClaims", "Users", new { id = user.Id });
         }
 
-        // DELETE: api/TrialfinderUsers/5
         [HttpPost("[action]/{id}")]
         public async Task<IActionResult> DeleteUser([FromRoute] string id)
         {

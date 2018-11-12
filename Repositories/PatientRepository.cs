@@ -44,5 +44,12 @@ namespace Repositories
 
             return userPatientList;
         }
+
+        public async Task<IEnumerable<Patient>> GetAllUserPatientsAdmin(string userId)
+        {
+            var userPatientListAdmin = await _context.Patients.Where(x => x.UserId == userId).ToListAsync();
+
+            return userPatientListAdmin;
+        }
     }
 }

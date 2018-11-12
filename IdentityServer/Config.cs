@@ -74,7 +74,7 @@ namespace IdentityServer
             {
                 new Client
                 {
-                    ClientName = "Tour Management",
+                    ClientName = "Bedording test data generator",
                     ClientId="testDataGeneratorClient",
                     AllowedGrantTypes = GrantTypes.Implicit,
                     RequireConsent = false,

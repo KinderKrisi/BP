@@ -67,24 +67,6 @@ namespace IdentityServer
                 .AddInMemoryApiResources(Config.GetApiResources())
                 .AddInMemoryClients(Config.GetClients())
                 .AddAspNetIdentity<ApplicationUser>();
-
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy(
-                  "UserMustBeGlobalAdministrator",
-                  policyBuilder =>
-                  {
-                      policyBuilder.RequireAuthenticatedUser();
-                      policyBuilder.RequireRole("Global");
-                  });
-                options.AddPolicy(
-                   "UserMustBeSuperAdministrator",
-                   policyBuilder =>
-                   {
-                       policyBuilder.RequireAuthenticatedUser();
-                       policyBuilder.RequireRole("Global", "Super");
-                   });
-            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

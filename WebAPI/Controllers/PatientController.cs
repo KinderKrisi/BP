@@ -25,6 +25,11 @@ namespace WebAPI.Controllers
         [HttpGet("[action]")]
         public async Task<ActionResult<Patient[]>> GetAllPatientsForUser()
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             var userPatientList = await _repository.GetAllPatientsForUser();
             if(userPatientList == null)
             {
@@ -36,6 +41,11 @@ namespace WebAPI.Controllers
         [HttpPost("[action]")]
         public async Task<ActionResult<Patient>> CreatePatient(PatientVM newPatientVM)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             var newPatient = await _repository.CreatePatient(newPatientVM);
 
             if(newPatient == null)
@@ -43,6 +53,22 @@ namespace WebAPI.Controllers
                 return BadRequest();
             }
             return Ok(newPatient);
+        }
+        [Authorize(Roles = "Regular, Super, Global")]
+        [HttpGet("[action]/{userId}")]
+        public async Task<ActionResult<Patient[]>> GetAllUserPatientsAdmin (string userId)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var userPatientListAdmin = await _repository.GetAllUserPatientsAdmin(userId);
+
+            if(userPatientListAdmin == null)
+            {
+                return BadRequest();
+            }
+            return Ok(userPatientListAdmin);
         }
     }
 }
