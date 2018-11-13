@@ -1,0 +1,38 @@
+﻿@model IdentityServer.ViewModel.RegisterUserVM
+@{
+    ViewData["Title"] = "AddUser";
+}
+
+<h2>AddUser</h2>
+
+<form asp-controller="Users" asp-action="AddUser" method="post" role="form">
+    <div class="form-group row">
+        <label asp-for="UserName" class="col-sm-2 col-form-label">User Name</label>
+        <div class="col">
+            <input class="form-control" asp-for="UserName" placeholder="Username" required />
+        </div>
+        <div class="col"></div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="Email" class="col-sm-2 col-form-label">Email</label>
+        <div class="col">
+            <input class="form-control" asp-for="Email" type="email" placeholder="Email" required />
+        </div>
+        <div class="col"></div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="UserType" class="col-sm-2 col-form-label">UserType</label>
+        <div class="col">
+            <select class="custom-select" asp-for="UserType" asp-items="Model.UserTypes"></select>
+        </div>
+        <div class="col"></div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="AdminType" class="col-sm-2 col-form-label">AdminLevel</label>
+        <div class="col">
+            <select class="custom-select" asp-for="AdminType" asp-items="Model.AdminTypes"></select>
+        </div>
+        <div class="col"></div>
+    </div>
+    <button class="btn btn-primary" type="submit">Submit</button>
+</form>

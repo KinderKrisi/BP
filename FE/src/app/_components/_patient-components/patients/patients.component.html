@@ -1,0 +1,8 @@
+<div class="ui-g-6">
+    <button (click)="getUsersPatients()"> Get User Profiles</button>
+    <div *ngFor="let patient of patientList" (click)="navigateToDetail(patient.id)">
+      {{patient.address}}
+    </div>
+    </div>
+  
+      

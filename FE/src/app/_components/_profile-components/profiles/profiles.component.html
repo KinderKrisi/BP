@@ -1,0 +1,17 @@
+<div class="ui-g-6">
+<button (click)="getUsersProfiles()"> Get User Profiles</button>
+<div *ngFor="let profile of userProfileList" (click)="navigateToDetail(profile.id)">
+  {{profile.address}}
+</div>
+</div>
+
+<div class="ui-g-6">
+  <button (click)="getAllProfiles()"> Get All Users Profiles</button>
+  <div *ngFor="let profile of allProfileList">
+    <div >
+    {{profile.address}}, {{profile.userId}}
+    </div>
+  </div>
+  </div>
+
+  

@@ -10,6 +10,6 @@ namespace Data
         public string NameOfHospital { get; set; }
         public string Address { get; set; }
         public float Rate { get; set; }
-        public User User { get; set; }
+        public string UserId { get; set; }
     }
 }

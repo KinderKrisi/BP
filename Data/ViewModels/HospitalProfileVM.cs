@@ -9,6 +9,5 @@ namespace Data.ViewModels
         public string NameOfHospital { get; set; }
         public string Address { get; set; }
         public float Rate { get; set; }
-        public int UserId { get; set; }
     }
 }
