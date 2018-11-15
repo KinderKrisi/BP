@@ -1,0 +1,23 @@
+nav{
+    ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    }
+    li {
+    min-width: 100px;
+    min-height: 50px;
+    text-align: center;
+    vertical-align: middle;
+    }
+    li a:hover {
+        background-color: black;
+
+    }
+    a {
+        color: white;
+        vertical-align: middle;
+    }
+
+}

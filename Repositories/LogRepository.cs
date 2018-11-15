@@ -21,9 +21,17 @@ namespace Repositories
             _userInfoService = userInfoService;
         }
 
-        public async Task AddLog(Log log)
+        public async Task AddLog(string userId, string message)
         {
-            _context.Logs.Add(log);
+            var newLog = new Log()
+            {
+                Severity = "Error",
+                Message = message,
+                UserId = userId,
+                TimeOfOccurrence = DateTime.Now
+            };
+
+            _context.Logs.Add(newLog);
             await _context.SaveChangesAsync();
         }
 

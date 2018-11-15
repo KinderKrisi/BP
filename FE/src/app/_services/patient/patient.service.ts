@@ -22,7 +22,6 @@ export class PatientService {
       tap(result => 
         {
           this.dataService.patientSetUserPatientList(result);
-          this.toastService.toastMessage("success", "Get patients", "Patients for user has been recieved")
         }),
         catchError(err => {
           this.toastService.toastMessage("error", "Get patients", err.error.msg[0]);
@@ -30,9 +29,10 @@ export class PatientService {
         })
     )
   }
-  getAllUserPatientsAdmin(userId: string) : Observable<Patient[]> {
-    return this.http.get<Patient[]>(this.patientUrl + `/GetAllUserPatientsAdmin/${userId}`).pipe(
-        catchError(err => {
+  getAllUserPatientsAdmin() : Observable<Patient[]> {
+    return this.http.get<Patient[]>(this.patientUrl + '/GetAllPatientsAdmin').pipe(
+        tap(adminPatientsList => this.dataService.patientAdminSetPatientList(adminPatientsList))
+        ,catchError(err => {
           this.toastService.toastMessage("error", "Get patients admin", err.error.msg[0]);
           return throwError(err)
         })
@@ -43,7 +43,6 @@ export class PatientService {
     return this.http.post<Patient>(this.patientUrl + "/CreatePatient", patient).pipe(
       tap(newPatient => {
         this.dataService.patientPushToUserPatientList(newPatient)
-        this.toastService.toastMessage("success", "Create patient", "Patien has been created")
       }),
         catchError(err => {
           this.toastService.toastMessage("error", "Create patient", err.error.msg[0]);

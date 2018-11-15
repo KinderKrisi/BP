@@ -9,6 +9,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ButtonModule } from 'primeng/button';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import { InputSwitchModule } from 'primeng/inputswitch';
+import {CardModule} from 'primeng/card';
+
 
 //Routes
 import { AppRoutingModule } from './app-routing.module';
@@ -51,7 +54,7 @@ import { ToastService } from './_services/toast/toast.service';
     PatientsComponent,
     CreatePatientComponent,
     PatientDetailComponent,
-    NavbarComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +64,9 @@ import { ToastService } from './_services/toast/toast.service';
     FormsModule,
     ReactiveFormsModule,
     ButtonModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    InputSwitchModule,
+    CardModule
   ],
   providers: [
     AddAuthorizationHeaderInterceptorProvider,

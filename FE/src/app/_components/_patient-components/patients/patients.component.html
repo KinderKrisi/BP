@@ -1,8 +1,33 @@
-<div class="ui-g-6">
-    <button (click)="getUsersPatients()"> Get User Profiles</button>
-    <div *ngFor="let patient of patientList" (click)="navigateToDetail(patient.id)">
-      {{patient.address}}
-    </div>
+
+  <div class="container ui-g ui-fluid dataTable">
+    <p-card class="ui-g-6 ui-g-nopad">
+    <button (click)="getUsersPatients()"> Refresh User Profiles</button>
+    <table>
+        <tr>
+          <th>Name</th>
+          <th colspan="3">Address</th>
+        </tr>
+        <tr *ngFor="let patient of patientList" (click)="navigateToDetail(patient.id)">
+          <td>{{patient.name}}</td>
+          <td colspan="3">{{patient.address}}</td>
+        </tr>
+      </table>
+      </p-card>
+      <p-card class="ui-g-6 ui-g-nopad">
+          <button (click)="getAdminPatients()"> Refresh Admin Profiles</button>
+          <table>
+              <tr>
+                <th>Name</th>
+                <th colspan="3">Address</th>
+                <th colspan="2">User ID</th>
+              </tr>
+              <tr *ngFor="let patient of patientList" (click)="navigateToDetail(patient.id)">
+                <td>{{patient.name}}</td>
+                <td colspan="3">{{patient.address}}</td>
+                <td colspan="2">{{patient.userId}}</td>
+              </tr>
+            </table>
+            </p-card>
     </div>
   
       

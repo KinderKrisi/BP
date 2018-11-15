@@ -8,15 +8,28 @@ import { Patient } from 'src/app/_models/patient';
 })
 export class DataService {
 
-  userProfileList : HospitalProfile[] = [];
-  userPatientList : Patient[] = [];
+  private userProfileList : HospitalProfile[] = [];
+  private adminProfileList : HospitalProfile[]= []
+
+  private userPatientList : Patient[] = [];
+  private adminPatientList: Patient[] = [];
+
+  private isAdmin : boolean = false;
   constructor() { }
+
+  //User
+  userSetIsAdmin(isAdmin : boolean) : void{
+    this.isAdmin = isAdmin;
+  }
+  userGetIsAdmin() : boolean{
+    return this.isAdmin;
+  }
+
+  
 
   //Profiles
   profileSetUserProfileList(list: HospitalProfile[]) : void {
-    console.log("returned list", list)
     this.userProfileList = list;
-    console.log("final", this.userProfileList)
   }
   profileGetUserProfileList() : HospitalProfile[] {
     return this.userProfileList;
@@ -33,6 +46,12 @@ export class DataService {
     this.userProfileList = this.userProfileList.filter(x => x.id != id);
     return this.userProfileList;
   }
+  profileAdminSetProfileList(list: HospitalProfile[]): void {
+    this.adminProfileList = list;
+  }
+  profileAdminGetProfileList() : HospitalProfile[] {
+    return this.adminProfileList;
+  }
 
 
 
@@ -48,5 +67,11 @@ export class DataService {
   }
   patientFindPatientInList(id: number) : Patient {
     return this.userPatientList.find(x => x.id == id)
+  }
+  patientAdminSetPatientList(list: Patient[]) : void {
+    this.adminPatientList = list;
+  }
+  patientAdminGetPatientList() : Patient[] {
+    return this.adminPatientList;
   }
 }

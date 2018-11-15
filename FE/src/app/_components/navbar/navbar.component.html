@@ -1,9 +1,12 @@
-<nav class="navbar">
-  <a routerLink="/create-profile"> Create profile</a>
-  <a routerLink="/create-patient"> Create patient</a>
-  <a routerLink="/profiles"> Profiles</a>
-  <a routerLink="/patients"> Patients</a>
-  <div *ngIf="!isLoggedin">
-  <button (click)="logout()"> Logout </button>
-  </div>
+<nav class="navbar ui-g-nopad">
+  <ul>
+    <li><a routerLink="/home">Home</a></li>
+    <li><a routerLink="/create-profile"> Create profile</a></li>
+    <li><a routerLink="/create-patient"> Create patient</a></li>
+    <li><a routerLink="/profiles"> Profiles</a></li>
+    <li><a routerLink="/patients"> Patients</a></li>
+    <li *ngIf="!isLoggedin">
+    <button (click)="logout()"> Logout </button>
+  </li>
+  </ul>
 </nav>

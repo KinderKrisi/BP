@@ -60,14 +60,14 @@ namespace WebAPI.Controllers
             return Ok(newPatient);
         }
         [Authorize(Roles = "Regular, Super, Global")]
-        [HttpGet("[action]/{userId}")]
-        public async Task<ActionResult<Patient[]>> GetAllUserPatientsAdmin (string userId)
+        [HttpGet("[action]")]
+        public async Task<ActionResult<Patient[]>> GetAllPatientsAdmin()
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var userPatientListAdmin = await _repository.GetAllUserPatientsAdmin(userId);
+            var userPatientListAdmin = await _repository.GetAllPatientsAdmin();
 
             if(userPatientListAdmin == null)
             {

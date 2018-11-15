@@ -1,0 +1,36 @@
+/* You can add global styles to this file, and also import other style files */
+.container{
+    margin-left: 5%;
+}
+body {
+    padding: 0;
+    background-color: lightgray;
+    margin: 0;
+}
+.dataTable{
+    table{
+        width: 100%;
+    
+        th{
+            background-color: green;
+            color: white;
+            border-width: 1px;
+        }
+        tr:hover{
+            background-color: gray;
+            color: white;
+            cursor: pointer;
+        }
+        td{
+            vertical-align: middle;
+            text-align: center;
+        }
+    }
+    
+    table, th, td {
+        border: 1px solid black;
+     }
+     th ,td {
+         min-width: 50px;
+     }
+}

@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Nobly.Extensions.ModelStateDictionary;
 
 
 namespace IdentityServer.Controllers
@@ -118,7 +119,7 @@ namespace IdentityServer.Controllers
                 {
                     foreach (var error in result.Errors)
                     {
-                        ModelState.AddModelError($"{error.Code}", error.Description);
+                        ModelState.AddErrorMessage(error.Description);
                     }
                     return BadRequest(ModelState);
                 }
@@ -206,34 +207,34 @@ namespace IdentityServer.Controllers
                 return BadRequest(ModelState);
             }
 
-            var trialfinderUser = await _userManager.FindByIdAsync(id);
-            if (trialfinderUser == null)
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null)
             {
                 return NotFound();
             }
-            if (await IsUserGlobalOrSuperAdmin(trialfinderUser))
+            if (await IsUserGlobalOrSuperAdmin(user))
             {
                 if (await IsLoggedInUserGlobalAdmin())
                 {
-                    await _userManager.DeleteAsync(trialfinderUser);
+                    await _userManager.DeleteAsync(user);
                 }
                 else
                 {
                     return RedirectToAction("AccessDenied", "Authorization");
                 }
             }
-            if (await IsUserGlobalOrSuperAdmin(trialfinderUser))
+            if (await IsUserGlobalOrSuperAdmin(user))
             {
                 if (await IsLoggedInUserGlobalAdmin())
                 {
-                    await _userManager.DeleteAsync(trialfinderUser);
+                    await _userManager.DeleteAsync(user);
                 }
                 else
                 {
                     return RedirectToAction("AccessDenied", "Authorization");
                 }
             }
-            await _userManager.DeleteAsync(trialfinderUser);
+            await _userManager.DeleteAsync(user);
             return RedirectToAction("Index");
         }
 

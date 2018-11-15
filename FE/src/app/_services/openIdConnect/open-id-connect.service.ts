@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { ReplaySubject } from 'rxjs';
 import { UserManager, User } from 'oidc-client';
+import { DataService } from '../data/data.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ export class OpenIdConnectService {
   private userManager: UserManager = new UserManager(environment.openIdConnectSettings);
   private currentUser: User;
 
+  private adminRolesList : string[] = ["Regular", "Super", "Global"]
 
   userLoaded$ = new ReplaySubject<boolean>(1);
 
@@ -22,7 +24,7 @@ export class OpenIdConnectService {
     return this.currentUser;
   }
 
-  constructor() {
+  constructor(private dataService : DataService) {
     this.userManager.clearStaleState();
 
     this.userManager.events.addUserLoaded(user => {
@@ -30,6 +32,7 @@ export class OpenIdConnectService {
         console.log('User loaded.', user);
       }
       this.currentUser = user;
+      this.isAdmin();
       this.userLoaded$.next(true);
     });
 
@@ -38,13 +41,14 @@ export class OpenIdConnectService {
         console.log('User unloaded');
       }
       this.currentUser = null;
+      this.isAdmin();
       this.userLoaded$.next(false);
     });
 
   }
 
   triggerSignIn() {
-    this.userManager.signinRedirect().then(function () {
+    this.userManager.signinRedirect().then(() => {
       if (!environment.production) {
         console.log('Redirection to signin triggered.');
       }
@@ -52,7 +56,7 @@ export class OpenIdConnectService {
   }
 
   handleCallback() {
-    this.userManager.signinRedirectCallback().then(function (user) {
+    this.userManager.signinRedirectCallback().then(user => {
       if (!environment.production) {
         console.log('Callback after signin handled.', user);
       }
@@ -60,9 +64,10 @@ export class OpenIdConnectService {
   }
 
   handleSilentCallback() {
-    this.userManager.signinSilentCallback().then(function (user) {
+    this.userManager.signinSilentCallback().then(user => {
       if(user) { 
         this.currentUser = user
+        this.isAdmin();
         if (!environment.production) {
           console.log('Callback after silent signin handled.', user);
         }
@@ -71,10 +76,14 @@ export class OpenIdConnectService {
   }
 
   triggerSignOut() {
-    this.userManager.signoutRedirect().then(function (resp) {
+    this.userManager.signoutRedirect().then(response => {
       if (!environment.production) {
-        console.log('Redirection to sign out triggered.', resp);
+        console.log('Redirection to sign out triggered.', response);
       }
     });
   };
+
+  private isAdmin() : void{
+      this.dataService.userSetIsAdmin(this.adminRolesList.includes(this.currentUser.profile.role));
+  }
 }
