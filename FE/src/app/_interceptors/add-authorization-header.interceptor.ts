@@ -10,8 +10,6 @@ export class AddAuthorizationHeaderInterceptor implements HttpInterceptor {
 
     intercept(request: HttpRequest<any>, next: HttpHandler):
         Observable<HttpEvent<any>> {
-            console.log(this.openIdConnectService.user)
-        // add the access token as bearer token
         request = request.clone({
             setHeaders: {
                 Authorization: this.openIdConnectService.user.token_type + " "

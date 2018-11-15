@@ -46,14 +46,8 @@ namespace Repositories
             }
             catch (Exception ex)
             {
-                var newLog = new Log()
-                {
-                    Severity = "Error",
-                    Message = ex.Message,
-                    UserId = UserId,
-                    TimeOfOccurrence = DateTime.Now
-                };
-                await _logRepository.AddLog(newLog);
+                await _logRepository.AddLog(UserId, ex.Message);
+                return null;
             }
             return dummyProfile;
         }
@@ -71,14 +65,8 @@ namespace Repositories
                 }
                 catch (Exception ex)
                 {
-                    var newLog = new Log()
-                    {
-                        Severity = "Error",
-                        Message = ex.Message,
-                        UserId = UserId,
-                        TimeOfOccurrence = DateTime.Now
-                    };
-                    await _logRepository.AddLog(newLog);
+                    await _logRepository.AddLog(UserId, ex.Message);
+                    return false;
                 }
             }
             return false;
@@ -97,14 +85,7 @@ namespace Repositories
                 }
                 catch (Exception ex)
                 {
-                    var newLog = new Log()
-                    {
-                        Severity = "Error",
-                        Message = ex.Message,
-                        UserId = UserId,
-                        TimeOfOccurrence = DateTime.Now
-                    };
-                    await _logRepository.AddLog(newLog);
+                    await _logRepository.AddLog(UserId, ex.Message);
                     return false;
                 }
             }
@@ -120,15 +101,7 @@ namespace Repositories
             }
             catch (Exception ex)
             {
-                var newLog = new Log()
-                {
-                    Severity = "Error",
-                    Message = ex.Message,
-                    UserId = UserId,
-                    TimeOfOccurrence = DateTime.Now
-                };
-                await _logRepository.AddLog(newLog);
-
+                await _logRepository.AddLog(UserId, ex.Message);
                 return null;
             }
 
@@ -143,15 +116,7 @@ namespace Repositories
             }
             catch (Exception ex)
             {
-                var newLog = new Log()
-                {
-                    Severity = "Error",
-                    Message = ex.Message,
-                    UserId = UserId,
-                    TimeOfOccurrence = DateTime.Now
-                };
-                await _logRepository.AddLog(newLog);
-
+                await _logRepository.AddLog(UserId, ex.Message);
                 return null;
             }
         }

@@ -9,7 +9,7 @@ namespace Repositories.Interfaces
 {
     public interface ILogRepository
     {
-        Task AddLog(Log log);
+        Task AddLog(string userId, string message);
         Task AddLogFE(LogVM log);
     }
 }

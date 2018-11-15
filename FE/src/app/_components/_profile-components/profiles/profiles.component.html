@@ -1,17 +1,38 @@
-<div class="ui-g-6">
-<button (click)="getUsersProfiles()"> Get User Profiles</button>
-<div *ngFor="let profile of userProfileList" (click)="navigateToDetail(profile.id)">
-  {{profile.address}}
-</div>
-</div>
 
-<div class="ui-g-6">
-  <button (click)="getAllProfiles()"> Get All Users Profiles</button>
-  <div *ngFor="let profile of allProfileList">
-    <div >
-    {{profile.address}}, {{profile.userId}}
-    </div>
-  </div>
-  </div>
+<div class="container ui-g ui-fluid dataTable">
+  <p-card class="ui-g-6 ui-g-nopad">
+<button (click)="getUsersProfiles()"> Refresh User Profiles</button>
+  <table>
+    <tr>
+      <th>Hospital name</th>
+      <th colspan="3">Address</th>
+      <th>Rate</th>
+    </tr>
+    <tr *ngFor="let profile of userProfileList" (click)="navigateToDetail(profile.id)">
+      <td>{{profile.nameOfHospital}}</td>
+      <td colspan="3">{{profile.address}}</td>
+      <td>{{profile.rate}}</td>
+    </tr>
+  </table>
+  </p-card>
+
+    <p-card class="ui-g-6 ui-g-nopad" *ngIf="isAdmin">
+    <button (click)="getAllProfiles()"> Refresh All Users Profiles</button>
+    <table>
+      <tr>
+        <th>Hospital name</th>
+        <th colspan="3">Address</th>
+        <th>Rate</th>
+        <th colspan="2">User ID</th>
+      </tr>
+      <tr class="data" *ngFor="let profile of adminProfileList" (click)="navigateToDetail(profile.id)">
+        <td>{{profile.nameOfHospital}}</td>
+        <td colspan="3">{{profile.address}}</td>
+        <td>{{profile.rate}}</td>
+        <td colspan="2">{{profile.userId}}</td>
+      </tr>
+    </table>
+  </p-card>
+</div>
 
   

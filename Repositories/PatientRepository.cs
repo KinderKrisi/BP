@@ -44,14 +44,7 @@ namespace Repositories
             }
             catch(Exception ex)
             {
-                var newLog = new Log()
-                {
-                    Severity = "Error",
-                    Message = ex.Message,
-                    UserId = UserId,
-                    TimeOfOccurrence = DateTime.Now
-                };
-                await _logRepository.AddLog(newLog);
+                await _logRepository.AddLog(UserId, ex.Message);
                 return null;
             }
             
@@ -66,35 +59,21 @@ namespace Repositories
             }
             catch (Exception ex)
             {
-                var newLog = new Log()
-                {
-                    Severity = "Error",
-                    Message = ex.Message,
-                    UserId = UserId,
-                    TimeOfOccurrence = DateTime.Now
-                };
-                await _logRepository.AddLog(newLog);
+                await _logRepository.AddLog(UserId, ex.Message);
                 return null;
             }
         }
 
-        public async Task<IEnumerable<Patient>> GetAllUserPatientsAdmin(string userId)
+        public async Task<IEnumerable<Patient>> GetAllPatientsAdmin()
         {
             try
             {
-               var userPatientListAdmin = await _context.Patients.Where(x => x.UserId == userId).ToListAsync();
+               var userPatientListAdmin = await _context.Patients.OrderBy(x => x.UserId).ToListAsync();
                 return userPatientListAdmin;
             }
             catch (Exception ex)
             {
-                var newLog = new Log()
-                {
-                    Severity = "Error",
-                    Message = ex.Message,
-                    UserId = UserId,
-                    TimeOfOccurrence = DateTime.Now
-                };
-                await _logRepository.AddLog(newLog);
+                await _logRepository.AddLog(UserId, ex.Message);
                 return null;
             }
         }

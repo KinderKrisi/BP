@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Change user information</h2>
+
+<a style="font-size:2em" role="button" asp-controller="UserModification"> User Modification</a>
+
+<div class="col">
+    <a asp-action="ChangePassword" asp-controller="UserModification" role="button" class="btn btn-primary"> Change password</a>
+</div>
