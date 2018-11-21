@@ -55,11 +55,11 @@ namespace Repositories
         public async Task<bool> DeleteProfile(int id)
         {
             var profile = await _context.Profiles.FirstOrDefaultAsync(x => x.UserId == UserId && x.Id == id);
-            if (profile != null)
+            if(profile != null)
             {
                 try
                 {
-                    _context.Remove(profile);
+                    _context.Profiles.Remove(profile);
                     await _context.SaveChangesAsync();
                     return true;
                 }
@@ -79,7 +79,7 @@ namespace Repositories
             {
                 try
                 {
-                    _context.Remove(profile);
+                    _context.Profiles.Remove(profile);
                     await _context.SaveChangesAsync();
                     return true;
                 }

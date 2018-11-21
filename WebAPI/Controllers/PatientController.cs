@@ -76,5 +76,41 @@ namespace WebAPI.Controllers
             }
             return Ok(userPatientListAdmin);
         }
+
+        [Authorize(Roles = "Regular, Super, Global")]
+        [HttpDelete("[action]/{id}")]
+        public async Task<ActionResult<Patient>> DeletePatientAdmin(int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var userDeleted = await _repository.DeletePatientAdmin(id);
+            if (!userDeleted)
+            {
+                ModelState.AddErrorMessage("Unable to delete patient");
+                return BadRequest(ModelState);
+            }
+
+            return Ok();
+        }
+        [HttpDelete("[action]/{id}")]
+        public async Task<ActionResult<Patient>> DeletePatient(int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var userDeleted = await _repository.DeletePatient(id);
+            if (!userDeleted)
+            {
+                ModelState.AddErrorMessage("Unable to delete patient");
+                return BadRequest(ModelState);
+            }
+
+            return Ok();
+        }
     }
 }

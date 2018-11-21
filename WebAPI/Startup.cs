@@ -73,26 +73,7 @@ namespace WebAPI
                     options.Authority = _identityConfiguration.Authority;
                     options.ApiName = _identityConfiguration.ApiName;
                  });
-            /*
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("UserMustBeAdministrator", policyBuilder =>
-                {
-                    policyBuilder.RequireAuthenticatedUser();
-                    policyBuilder.RequireRole("Administrator");
-                });
-                options.AddPolicy(
-                   "UserMustBeAdministrator",
-                   policyBuilder =>
-                   {
-                       policyBuilder.RequireAuthenticatedUser();
-                       policyBuilder.AddRequirements(
-                         new UserMustBeAdministratorRequirement("Administrator"));
-                   });
-            });
-            
-            services.AddScoped<IAuthorizationHandler, UserMustBeAdministratorRequirementHandler>();
-            */
+
             services.AddScoped<IUserInfoService, UserInfoService>();
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 

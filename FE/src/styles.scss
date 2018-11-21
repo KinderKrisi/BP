@@ -10,27 +10,38 @@ body {
 .dataTable{
     table{
         width: 100%;
-    
         th{
             background-color: green;
             color: white;
             border-width: 1px;
-        }
-        tr:hover{
-            background-color: gray;
-            color: white;
-            cursor: pointer;
         }
         td{
             vertical-align: middle;
             text-align: center;
         }
     }
-    
     table, th, td {
         border: 1px solid black;
      }
      th ,td {
          min-width: 50px;
      }
+     .detail{
+         background-color: blue;
+         color: white;
+     }
+     .detail:hover{
+        background-color: lightblue;
+        color: black;
+        cursor: pointer;
+    }
+     .delete{
+         background-color: red;
+         color: white;
+     }
+     .delete:hover{
+        background-color: lightcoral;
+        color: black;
+        cursor: pointer;
+    }
 }

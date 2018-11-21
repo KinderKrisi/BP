@@ -1,12 +1,39 @@
+<div class="container ui-g ui-fluid">
+  <div class="ui-g-12 ui-md-4">
+    <form protocolForm="ngForm" (ngSubmit)="onSubmit()" autocomplete="off">
 
-  <div class="container ui-g ui-fluid">
-      <div class="ui-g-12 ui-md-4">
-      <div class="patientInfo">
-        <input [(ngModel)]="patient.name" [disabled]=true>
-      </div>
-      
-      
-      </div>
+        <div class="label-text ui-g-2 ui-sm-12">
+            <label for="edit">Enable Edditing:</label>
+          </div>
+          <div class="ui-g-9 ui-sm-11 ui-lg-5 ui-fluid">
+            <p-inputSwitch onLabel="Yes" offLabel="No" name="edit" [(ngModel)]="isEditingEnabled"></p-inputSwitch>
+          </div>
 
-    
+        <div class="ui-inputgroup ui-g-12">
+            <span class="ui-inputgroup-addon">
+              <i class="fa fa-signature"></i>
+            </span>
+        <input type="text" name="name"  pInputText placeholder="Name of the Patient" [(ngModel)]="patient.name" [disabled]="!isEditingEnabled" required/>
+          </div>
+      <div class="ui-inputgroup ui-g-12">
+        <span class="ui-inputgroup-addon">
+          <i class="fa fa-home"></i>
+        </span>
+        <input type="text" name="address" placeholder="Address" [(ngModel)]="patient.address" [disabled]="!isEditingEnabled" required/>
+      </div>
+      <div *ngIf="isAdmin" class="ui-inputgroup ui-g-12">
+        <span class="ui-inputgroup-addon">
+          <i class="fa fa-money-bill-wave"></i>
+        </span>
+        <input name="userID" type="text" placeholder="userId" [(ngModel)]="patient.userId" [disabled]="true"/>
+      </div>
+      <div class="ui-g-6" *ngIf="isEditingEnabled">
+        <button pButton type="button" class="ui-button-raised ui-button-rounded" label="Update"
+          (click)="onSubmit($event)"></button>
+      </div>
+      <div class="ui-g-6">
+        <button pButton type="button" class="ui-button-danger ui-button-rounded ui-button-raised" label="Delete" (click)="deletePatient()"></button>
+      </div>
+    </form>
     </div>
+  </div>

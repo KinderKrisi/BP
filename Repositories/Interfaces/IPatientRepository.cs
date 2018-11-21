@@ -12,5 +12,7 @@ namespace Repositories.Interfaces
         Task<Patient> CreatePatient(PatientVM newPatientVM);
         Task<IEnumerable<Patient>> GetAllPatientsForUser();
         Task<IEnumerable<Patient>> GetAllPatientsAdmin();
+        Task<bool> DeletePatient(int id);
+        Task<bool> DeletePatientAdmin(int id);
     }
 }

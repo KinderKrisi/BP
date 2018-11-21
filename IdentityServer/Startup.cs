@@ -85,9 +85,7 @@ namespace IdentityServer
             }
 
             app.UseCors("default");
-            /*app.UseCors(options => options.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader()
-    .AllowCredentials());
-    */
+
             app.UseStaticFiles();
 
             app.UseIdentityServer();

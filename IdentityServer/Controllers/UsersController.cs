@@ -82,7 +82,7 @@ namespace IdentityServer.Controllers
                 var applicationUser = new ApplicationUser();
                 applicationUser.Email = userVm.Email;
                 applicationUser.UserName = userVm.UserName;
-                var result = await _userManager.CreateAsync(applicationUser, "Test123"); //Todo change to real pass
+                var result = await _userManager.CreateAsync(applicationUser, "Test123"); //Todo: change to real pass
                 if (result.Succeeded)
                 {
                     user = await _userManager.FindByIdAsync(applicationUser.Id);
@@ -110,10 +110,6 @@ namespace IdentityServer.Controllers
                         });
                     if (!claimResult.Succeeded) return BadRequest("Error adding usertype and section to user");
                     //Todo: Confirmation mail
-                    var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    var confirmationEmail = Url.Action("ConfirmEmailAddress", "Home",
-                        new { token = token, email = user.Email }, Request.Scheme);
-                    //System.IO.File.WriteAllText("confirmationLink.txt", confirmationEmail);
                 }
                 else
                 {

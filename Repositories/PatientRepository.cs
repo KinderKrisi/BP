@@ -77,5 +77,37 @@ namespace Repositories
                 return null;
             }
         }
+
+        public async Task<bool> DeletePatient(int id)
+        {
+            try
+            {
+                var userToDelete = await _context.Patients.FirstOrDefaultAsync(x => x.UserId == UserId && x.Id == id);
+                _context.Patients.Remove(userToDelete);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                await _logRepository.AddLog(UserId, ex.Message);
+                return false;
+            }
+        }
+
+        public async Task<bool> DeletePatientAdmin(int id)
+        {
+            try
+            {
+                var userToDelete = await _context.Patients.FirstOrDefaultAsync(x => x.Id == id);
+                _context.Patients.Remove(userToDelete);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                await _logRepository.AddLog(UserId, ex.Message);
+                return false;
+            }
+        }
     }
 }

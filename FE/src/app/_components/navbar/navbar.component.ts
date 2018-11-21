@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { OpenIdConnectService } from 'src/app/_services/openIdConnect/open-id-connect.service';
-import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-navbar',
@@ -10,7 +9,6 @@ import { MenuItem } from 'primeng/api';
 export class NavbarComponent implements OnInit {
 
   isLoggedIn: boolean = false;
-  items : MenuItem[];
   constructor(private openIdConnectService: OpenIdConnectService) { }
 
   ngOnInit() {

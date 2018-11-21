@@ -26,10 +26,19 @@
             <i class="fa fa-money-bill-wave"></i>
           </span>
           <input name="rate" type="number" step="0.01" placeholder="Rate" [(ngModel)]="profile.rate" [disabled]="!isEditingEnabled" required/>
-        </div>      
+        </div>
+        <div *ngIf="isAdmin" class="ui-inputgroup ui-g-12">
+          <span class="ui-inputgroup-addon">
+            <i class="fa fa-money-bill-wave"></i>
+          </span>
+          <input name="userId" type="text" placeholder="User Id" [(ngModel)]="profile.userId" [disabled]="true"/>
+        </div>   
         <div class="ui-inputgroup ui-g-12" *ngIf="isEditingEnabled">
           <button pButton type="button" class="ui-button-raised ui-button-rounded" label="Update"
             (click)="onSubmit($event)"></button>
+        </div>
+        <div class="ui-g-6">
+          <button pButton type="button" class="ui-button-danger ui-button-rounded ui-button-raised" label="Delete" (click)="deleteProfile()"></button>
         </div>
       </form>
       </div>

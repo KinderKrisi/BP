@@ -10,7 +10,7 @@ import { ButtonModule } from 'primeng/button';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { InputSwitchModule } from 'primeng/inputswitch';
-import {CardModule} from 'primeng/card';
+import { CardModule } from 'primeng/card';
 
 
 //Routes
@@ -37,10 +37,12 @@ import { AuthGuard } from './_guards/authGuard';
 
 //Services
 import { OpenIdConnectService } from './_services/openIdConnect/open-id-connect.service';
-import { DataService } from './_services/data/data.service';
 import { PatientService } from './_services/patient/patient.service';
 import { ProfileService } from './_services/profile/profile.service';
 import { ToastService } from './_services/toast/toast.service';
+import { UserDataService } from './_services/_data-services/user-data/user-data.service';
+import { ProfileDataService } from './_services/_data-services/profile-data/profile-data.service';
+import { PatientDataService } from './_services/_data-services/patient-data/patient-data.service';
 
 @NgModule({
   declarations: [
@@ -73,10 +75,12 @@ import { ToastService } from './_services/toast/toast.service';
     MessageService,
     AuthGuard,
     OpenIdConnectService,
-    DataService,
     PatientService,
     ProfileService,
-    ToastService
+    ToastService,
+    UserDataService,
+    ProfileDataService,
+    PatientDataService
   ],
   bootstrap: [AppComponent]
 })

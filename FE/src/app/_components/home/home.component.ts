@@ -1,10 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ProfileService } from '../../_services/profile/profile.service';
-import { OpenIdConnectService } from '../../_services/openIdConnect/open-id-connect.service';
-import { PatientService } from 'src/app/_services/patient/patient.service';
-import { Patient } from 'src/app/_models/patient';
-import { DataService } from 'src/app/_services/data/data.service';
-import { HospitalProfile } from 'src/app/_models/hospitalProfile';
+import { UserDataService } from 'src/app/_services/_data-services/user-data/user-data.service';
+
 
 @Component({
   selector: 'app-home',
@@ -18,9 +14,9 @@ export class HomeComponent implements OnInit {
 
 
 
-  constructor(private dataService: DataService) { }
+  constructor(private userDataService: UserDataService) { }
 
   ngOnInit() {
-    this.isAdmin = this.dataService.userGetIsAdmin();
+    this.isAdmin = this.userDataService.getIsAdmin();
   }
 }

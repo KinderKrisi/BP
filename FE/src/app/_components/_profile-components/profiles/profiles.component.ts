@@ -3,9 +3,8 @@ import { ProfileService } from 'src/app/_services/profile/profile.service';
 import { HospitalProfile } from 'src/app/_models/hospitalProfile';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
-import { OpenIdConnectService } from 'src/app/_services/openIdConnect/open-id-connect.service';
-import { DataService } from 'src/app/_services/data/data.service';
 import { ToastService } from 'src/app/_services/toast/toast.service';
+import { UserDataService } from 'src/app/_services/_data-services/user-data/user-data.service';
 
 @Component({
   selector: 'app-profiles',
@@ -19,12 +18,17 @@ export class ProfilesComponent implements OnInit {
   profiles : Observable<HospitalProfile[]>;
   isAdmin : boolean;
 
-  constructor(private profileService: ProfileService, private router: Router, private dataService : DataService, private toastService: ToastService) {
+  constructor(
+    private profileService: ProfileService, 
+    private router: Router, 
+    private toastService: ToastService,
+    private userDataService: UserDataService
+    ) {
    }
 
 
   ngOnInit() {
-    this.isAdmin = this.dataService.userGetIsAdmin();
+    this.isAdmin = this.userDataService.getIsAdmin();
 
     this.profileService.getProfilesForUser().subscribe(x => this.userProfileList = x)
     if(this.isAdmin)this.profileService.getAllProfilesAdmin().subscribe(x => this.adminProfileList = x)
@@ -46,6 +50,12 @@ export class ProfilesComponent implements OnInit {
   navigateToDetail(id: number) : void {
     this.router.navigate(['/profile', id]);
     console.log("navigated to detail")
+  }
+  deleteProfile(profileId : number) : void {
+    this.profileService.deleteProfile(profileId).subscribe();
+  }
+ deleteProfileAdmin(profileId: number) : void {
+  this.profileService.deleteProfileAdmin(profileId).subscribe();   
   }
 
 }

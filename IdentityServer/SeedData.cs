@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace IdentityServer
 {
@@ -19,7 +20,7 @@ namespace IdentityServer
             using (var scope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
                 var context = scope.ServiceProvider.GetService<IdentityServerDb>();
-                //context.Database.Migrate(); //comment this if you don't want to have the latest migration
+                context.Database.Migrate(); //Todo: Comment out if you don't want latest migration 
 
                 var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
                 var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();

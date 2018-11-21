@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { ReplaySubject } from 'rxjs';
 import { UserManager, User } from 'oidc-client';
-import { DataService } from '../data/data.service';
+import { UserDataService } from '../_data-services/user-data/user-data.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,7 @@ export class OpenIdConnectService {
   private userManager: UserManager = new UserManager(environment.openIdConnectSettings);
   private currentUser: User;
 
-  private adminRolesList : string[] = ["Regular", "Super", "Global"]
+  private adminRolesList : string[] = ["Regular", "Super", "Global"];
 
   userLoaded$ = new ReplaySubject<boolean>(1);
 
@@ -24,7 +24,7 @@ export class OpenIdConnectService {
     return this.currentUser;
   }
 
-  constructor(private dataService : DataService) {
+  constructor(private userDataService: UserDataService) {
     this.userManager.clearStaleState();
 
     this.userManager.events.addUserLoaded(user => {
@@ -84,6 +84,6 @@ export class OpenIdConnectService {
   };
 
   private isAdmin() : void{
-      this.dataService.userSetIsAdmin(this.adminRolesList.includes(this.currentUser.profile.role));
+      this.userDataService.setIsAdmin(this.adminRolesList.includes(this.currentUser.profile.role));
   }
 }
