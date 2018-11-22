@@ -18,7 +18,7 @@ namespace Services.IdentityServer
             // service is scoped, created once for each request => we only need to fetch the info in the constructor
             _httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
 
-            var currentContext = _httpContextAccessor.HttpContext;
+            var currentContext = _httpContextAccessor.HttpContext; 
             if (currentContext == null || !currentContext.User.Identity.IsAuthenticated)
             {
                 return;

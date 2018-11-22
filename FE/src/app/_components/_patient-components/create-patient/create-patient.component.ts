@@ -29,9 +29,8 @@ export class CreatePatientComponent implements OnInit {
       return;
     }
   }
-
+    
   private createPatient(newPatient: PatientVM) : void {
     this.patientService.createPatient(newPatient).subscribe(() => this.router.navigate(["/home"]));
   }
-
 }

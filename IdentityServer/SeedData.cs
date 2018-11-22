@@ -20,11 +20,11 @@ namespace IdentityServer
             using (var scope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
                 var context = scope.ServiceProvider.GetService<IdentityServerDb>();
-                context.Database.Migrate(); //Todo: Comment out if you don't want latest migration 
-
+                context.Database.Migrate(); //Todo: Comment out if you don't want latest migration, delete and manualy make migration if misbehaving
                 var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
                 var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
+               
                 foreach (var roleType in Enum.GetValues(typeof(AdminTypeEnum)))
                 {
                     var roleName = roleType.ToString();

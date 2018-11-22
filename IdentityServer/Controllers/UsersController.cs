@@ -82,7 +82,7 @@ namespace IdentityServer.Controllers
                 var applicationUser = new ApplicationUser();
                 applicationUser.Email = userVm.Email;
                 applicationUser.UserName = userVm.UserName;
-                var result = await _userManager.CreateAsync(applicationUser, "Test123"); //Todo: change to real pass
+                var result = await _userManager.CreateAsync(applicationUser, "Test123"); //Todo: change to real password
                 if (result.Succeeded)
                 {
                     user = await _userManager.FindByIdAsync(applicationUser.Id);
@@ -125,7 +125,7 @@ namespace IdentityServer.Controllers
         }
 
         [HttpGet("[action]/{id}")]
-        public async Task<IActionResult> EditUserClaims([FromRoute] string id)
+        public async Task<IActionResult> EditUserClaims(string id)
         {
 
             var user = await _userManager.FindByIdAsync(id);
@@ -145,7 +145,7 @@ namespace IdentityServer.Controllers
         }
 
         [HttpGet("[action]/{id}")]
-        public async Task<IActionResult> AddUserClaims([FromRoute] string id)
+        public async Task<IActionResult> AddUserClaims(string id)
         {
             var claims = new List<Claim>();
             for (int i = 0; i < 6; i++)
@@ -160,7 +160,7 @@ namespace IdentityServer.Controllers
         }
 
         [HttpPost("[action]/{id}")]
-        public async Task<IActionResult> AddUserClaims([FromRoute] string id, UserClaimsVM vm)
+        public async Task<IActionResult> AddUserClaims(string id, UserClaimsVM vm)
         {
             var user = await _userManager.FindByIdAsync(id);
             if (user == null) return NotFound("User not found");
@@ -186,7 +186,7 @@ namespace IdentityServer.Controllers
         }
 
         [HttpPost("[action]/{id}")]
-        public async Task<IActionResult> DeleteUserClaim([FromRoute] string id, string type, string value)
+        public async Task<IActionResult> DeleteUserClaim(string id, string type, string value)
         {
             var user = await _userManager.FindByIdAsync(id);
             if (user == null) return NotFound("User not found");
@@ -196,7 +196,7 @@ namespace IdentityServer.Controllers
         }
 
         [HttpPost("[action]/{id}")]
-        public async Task<IActionResult> DeleteUser([FromRoute] string id)
+        public async Task<IActionResult> DeleteUser(string id)
         {
             if (!ModelState.IsValid)
             {

@@ -34,7 +34,24 @@ namespace Repositories
             {
                 UserId = UserId,
                 Address = newPatientVM.Address,
-                Name = newPatientVM.Name
+                BirthDate = newPatientVM.BirthDate,
+                CivilRegistrationNumber = newPatientVM.CivilRegistrationNumber,
+                CivilStatusCode = newPatientVM.CivilStatusCode,
+                CountryIdentificationCode = newPatientVM.CountryIdentificationCode,
+                CountryIdentificationCodeSst = newPatientVM.CountryIdentificationCodeSst,
+                CountryIdentificationText = newPatientVM.CountryIdentificationText,
+                ParishDistrictCode = newPatientVM.ParishDistrictCode,
+                ParishDistrictText = newPatientVM.ParishDistrictText,
+                PersonGenderCode = newPatientVM.PersonGenderCode,
+                PersonName = newPatientVM.PersonName,
+                PopulationDistrictCode = newPatientVM.PopulationDistrictCode,
+                PopulationDistrictText = newPatientVM.PopulationDistrictText,
+                PractitionerIdentificationCode = newPatientVM.PractitionerIdentificationCode,
+                RegionalCode = newPatientVM.RegionalCode,
+                RegionalName = newPatientVM.RegionalName,
+                SocialDistrictCode = newPatientVM.SocialDistrictCode,
+                SocialDistrictText = newPatientVM.SocialDistrictText,
+                StatusCode = newPatientVM.StatusCode
             };
             try
             {
@@ -47,7 +64,7 @@ namespace Repositories
                 await _logRepository.AddLog(UserId, ex.Message);
                 return null;
             }
-            
+
         }
 
         public async Task<IEnumerable<Patient>> GetAllPatientsForUser()

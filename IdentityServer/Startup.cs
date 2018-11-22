@@ -33,12 +33,14 @@ namespace IdentityServer
             _owinConfiguration = new OwinConfiguration();
             Configuration.GetSection("OwinConfiguration").Bind(_owinConfiguration);
 
+            //Setup database
             var connectionString = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContextPool<IdentityServerDb>(options =>
             {
                 options.UseSqlServer(connectionString);
             });
 
+            //Setup Cors
             services.AddCors(options =>
             {
                 options.AddPolicy("default", policy =>
@@ -51,6 +53,7 @@ namespace IdentityServer
                 });
             });
 
+            //Setup Identity
             services.AddIdentity<ApplicationUser, IdentityRole>(cfg =>
             {
                 cfg.Password.RequireNonAlphanumeric = false;
@@ -61,6 +64,7 @@ namespace IdentityServer
 
             services.AddMvc();
 
+            //Identity server setup
             services.AddIdentityServer()
                 .AddDeveloperSigningCredential()
                 .AddInMemoryIdentityResources(Config.GetIdentityResources())

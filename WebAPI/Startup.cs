@@ -45,6 +45,7 @@ namespace WebAPI
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
+            //Cors policies
             services.AddCors(options =>
             {
                 options.AddPolicy("default", policy =>
@@ -56,14 +57,15 @@ namespace WebAPI
                 });
             });
 
+            //Prevent looping reference
             services.AddMvc().AddJsonOptions(options =>
             {
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
                 options.SerializerSettings.PreserveReferencesHandling = PreserveReferencesHandling.None;
             });
 
+            //Database setup
             var connectionString = Configuration.GetConnectionString("DefaultConnection");
-
             services.AddDbContext<BefordingTestContext>(opt =>
                 opt.UseSqlServer(connectionString));
 
@@ -74,9 +76,9 @@ namespace WebAPI
                     options.ApiName = _identityConfiguration.ApiName;
                  });
 
+            //Adding to container so services can be used with Dependency Injection
             services.AddScoped<IUserInfoService, UserInfoService>();
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-
             services.AddTransient<IProfileRepository, ProfileRepository>();
             services.AddTransient<IPatientRepository, PatientRepository>();
             services.AddTransient<ILogRepository, LogRepository>();
