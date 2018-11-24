@@ -12,9 +12,6 @@ export class PatientVM {
 	parishDistrictCode: string;
 	parishDistrictText: string;
 	personGenderCode: string;
-	personIdentifierFather: string;
-	personIdentifierMother: string;
-	personIdentifierSpouse: string;
 	populationDistrictCode: string;
 	populationDistrictText: string;
 	practitionerIdentificationCode: string;

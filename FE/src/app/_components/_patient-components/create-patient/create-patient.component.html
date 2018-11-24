@@ -1,23 +1,210 @@
-
 <div class="container ui-g ui-fluid">
-    <div class="ui-g-12 ui-md-4">
-      <form protocolForm="ngForm" (ngSubmit)="onSubmit()" autocomplete="off">
+
+  <div class="ui-g-12 ui-md-4">
+    <form protocolForm="ngForm" (ngSubmit)="onSubmit()" autocomplete="off">
+      <div class="Patient-name">
+        <div class="ui-inputgroup ui-g-12">
+          <span class="ui-inputgroup-addon">
+            <i class="fa fa-user"></i>
+          </span>
+          <input type="text" name="firstName" pInputText placeholder="First name of patient" [(ngModel)]="newPatient.patientName.firstName"
+            required />
+        </div>
+        <div class="ui-inputgroup ui-g-12">
+          <span class="ui-inputgroup-addon">
+            <i class="fa fa-user"></i>
+          </span>
+          <input type="text" name="middleName" pInputText placeholder="Middle name of patient" [(ngModel)]="newPatient.patientName.middleName"
+            required />
+        </div>
+        <div class="ui-inputgroup ui-g-12">
+          <span class="ui-inputgroup-addon">
+            <i class="fa fa-user"></i>
+          </span>
+          <input type="text" name="lastName" pInputText placeholder="Last name of patient" [(ngModel)]="newPatient.patientName.lastName"
+            required />
+        </div>
+      </div>
+      <div class="Address">
+        <div class="ui-inputgroup ui-g-12">
+          <span class="ui-inputgroup-addon">
+            <i class="fa fa-user"></i>
+          </span>
+          <input type="text" name="cityName" pInputText placeholder="City name" [(ngModel)]="newPatient.address.cityName"
+            required />
+        </div>
+        <div class="ui-inputgroup ui-g-12">
+          <span class="ui-inputgroup-addon">
+            <i class="fa fa-user"></i>
+          </span>
+          <input type="text" name="floor" pInputText placeholder="Floor" [(ngModel)]="newPatient.address.floor"
+            required />
+        </div>
+        <div class="ui-inputgroup ui-g-12">
+          <span class="ui-inputgroup-addon">
+            <i class="fa fa-user"></i>
+          </span>
+          <input type="text" name="houseLetter" pInputText placeholder="house Letter" [(ngModel)]="newPatient.address.houseLetter"
+            required />
+        </div>
+        <div class="ui-inputgroup ui-g-12">
+          <span class="ui-inputgroup-addon">
+            <i class="fa fa-user"></i>
+          </span>
+          <input type="text" name="houseNumber" pInputText placeholder="house number" [(ngModel)]="newPatient.address.houseNumber"
+            required />
+        </div>
+        <div class="ui-inputgroup ui-g-12">
+          <span class="ui-inputgroup-addon">
+            <i class="fa fa-user"></i>
+          </span>
+          <input type="text" name="municipalityCode" pInputText placeholder="municipality code" [(ngModel)]="newPatient.address.municipalityCode"
+            required />
+        </div>
+        <div class="ui-inputgroup ui-g-12">
+          <span class="ui-inputgroup-addon">
+            <i class="fa fa-user"></i>
+          </span>
+          <input type="text" name="postCodeIdentifier" pInputText placeholder="post code identifier" [(ngModel)]="newPatient.address.postCodeIdentifier"
+            required />
+        </div>
+        <div class="ui-inputgroup ui-g-12">
+          <span class="ui-inputgroup-addon">
+            <i class="fa fa-user"></i>
+          </span>
+          <input type="text" name="sideOrDoor" pInputText placeholder="side or door" [(ngModel)]="newPatient.address.sideOrDoor"
+            required />
+        </div>
+        <div class="ui-inputgroup ui-g-12">
+          <span class="ui-inputgroup-addon">
+            <i class="fa fa-user"></i>
+          </span>
+          <input type="text" name="streetName" pInputText placeholder="street name" [(ngModel)]="newPatient.address.streetName"
+            required />
+        </div>
+        <div class="ui-inputgroup ui-g-12">
+          <span class="ui-inputgroup-addon">
+            <i class="fa fa-user"></i>
+          </span>
+          <input type="text" name="streetNumber" pInputText placeholder="street number" [(ngModel)]="newPatient.address.streetNumber"
+            required />
+        </div>
+      </div>
+
+      <div class="Additional info">
           <div class="ui-inputgroup ui-g-12">
               <span class="ui-inputgroup-addon">
                 <i class="fa fa-user"></i>
               </span>
-          <input type="text" name="name"  pInputText placeholder="Name of patient" [(ngModel)]="newPatient.name" required/>
+              <input type="text" name="civilRegistrationNumber" pInputText placeholder="civil registrationNumber" [(ngModel)]="newPatient.civilRegistrationNumber"
+                required />
             </div>
-        <div class="ui-inputgroup ui-g-12">
-          <span class="ui-inputgroup-addon">
-            <i class="fa fa-home"></i>
-          </span>
-          <input type="text" name="address" placeholder="Address" [(ngModel)]="newPatient.address" required/>
-        </div>   
-        <div class="ui-inputgroup ui-g-12">
-          <button pButton type="button" [disabled]="loading" class="ui-button-raised ui-button-rounded" label="Create"
-            (click)="onSubmit($event)"></button>
-        </div>
-      </form>
+            <div class="ui-inputgroup ui-g-12">
+                <span class="ui-inputgroup-addon">
+                  <i class="fa fa-user"></i>
+                </span>
+                <input type="text" name="civilStatusCode" pInputText placeholder="civil statusCode" [(ngModel)]="newPatient.civilStatusCode"
+                  required />
+              </div>
+              <div class="ui-inputgroup ui-g-12">
+                  <span class="ui-inputgroup-addon">
+                    <i class="fa fa-user"></i>
+                  </span>
+                  <input type="text" name="civilSubstituteNumberNational" pInputText placeholder="civil substitute number national" [(ngModel)]="newPatient.civilSubstituteNumberNational"
+                    required />
+                </div>
+                <div class="ui-inputgroup ui-g-12">
+                    <span class="ui-inputgroup-addon">
+                      <i class="fa fa-user"></i>
+                    </span>
+                    <input type="text" name="countryIdentificationCode" pInputText placeholder="country identification code" [(ngModel)]="newPatient.countryIdentificationCode"
+                      required />
+                  </div>
+                  <div class="ui-inputgroup ui-g-12">
+                      <span class="ui-inputgroup-addon">
+                        <i class="fa fa-user"></i>
+                      </span>
+                      <input type="text" name="countryIdentificationCodeSST" pInputText placeholder="country identification code SST" [(ngModel)]="newPatient.countryIdentificationCodeSST"
+                        required />
+                    </div>
+                    <div class="ui-inputgroup ui-g-12">
+                        <span class="ui-inputgroup-addon">
+                          <i class="fa fa-user"></i>
+                        </span>
+                        <input type="text" name="countryIdentificationText" pInputText placeholder="country identification text" [(ngModel)]="newPatient.countryIdentificationText"
+                          required />
+                      </div>
+                      <div class="ui-inputgroup ui-g-12">
+                          <span class="ui-inputgroup-addon">
+                            <i class="fa fa-user"></i>
+                          </span>
+                          <input type="text" name="parishDistrictCode" pInputText placeholder="parish district code" [(ngModel)]="newPatient.parishDistrictCode"
+                            required />
+                        </div>
+                        <div class="ui-inputgroup ui-g-12">
+                            <span class="ui-inputgroup-addon">
+                              <i class="fa fa-user"></i>
+                            </span>
+                            <input type="text" name="parishDistrictText" pInputText placeholder="parish district text" [(ngModel)]="newPatient.parishDistrictText"
+                              required />
+                          </div>
+                          <div class="ui-inputgroup ui-g-12">
+                              <span class="ui-inputgroup-addon">
+                                <i class="fa fa-user"></i>
+                              </span>
+                              <input type="text" name="personGenderCode" pInputText placeholder="person gender code" [(ngModel)]="newPatient.personGenderCode"
+                                required />
+                            </div>
+                            <div class="ui-inputgroup ui-g-12">
+                                <span class="ui-inputgroup-addon">
+                                  <i class="fa fa-user"></i>
+                                </span>
+                                <input type="text" name="populationDistrictCode" pInputText placeholder="population district code" [(ngModel)]="newPatient.populationDistrictCode"
+                                  required />
+                              </div>
+                              <div class="ui-inputgroup ui-g-12">
+                                  <span class="ui-inputgroup-addon">
+                                    <i class="fa fa-user"></i>
+                                  </span>
+                                  <input type="text" name="populationDistrictText" pInputText placeholder="population district text" [(ngModel)]="newPatient.populationDistrictText"
+                                    required />
+                                </div>
+                                <div class="ui-inputgroup ui-g-12">
+                                    <span class="ui-inputgroup-addon">
+                                      <i class="fa fa-user"></i>
+                                    </span>
+                                    <input type="text" name="practitionerIdentificationCode" pInputText placeholder="practitioner identification code" [(ngModel)]="newPatient.practitionerIdentificationCode"
+                                      required />
+                                  </div>
+                                  <div class="ui-inputgroup ui-g-12">
+                                      <span class="ui-inputgroup-addon">
+                                        <i class="fa fa-user"></i>
+                                      </span>
+                                      <input type="text" name="regionalCode" pInputText placeholder="regional code" [(ngModel)]="newPatient.regionalCode"
+                                        required />
+                                    </div>
+                                    <div class="ui-inputgroup ui-g-12">
+                                        <span class="ui-inputgroup-addon">
+                                          <i class="fa fa-user"></i>
+                                        </span>
+                                        <input type="text" name="regionalName" pInputText placeholder="regional name" [(ngModel)]="newPatient.regionalName"
+                                          required />
+                                      </div>
+
       </div>
-    </div>
+
+      <div class="ui-inputgroup ui-g-12">
+        <span class="ui-inputgroup-addon">
+          <i class="fa fa-home"></i>
+        </span>
+        <input type="text" name="address" placeholder="Address" [(ngModel)]="newPatient.address" required />
+      </div>
+      <div class="ui-inputgroup ui-g-12">
+        <button pButton type="button" [disabled]="loading" class="ui-button-raised ui-button-rounded" label="Create"
+          (click)="onSubmit($event)"></button>
+      </div>
+    </form>
+  </div>
+
+
+</div>

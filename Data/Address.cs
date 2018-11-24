@@ -6,6 +6,7 @@ namespace Data
 {
     public class Address
     {
+        public int? Id { get; set; }
         public string CityName { get; set; }
         public string Floor { get; set; }
         public string HouseLetter { get; set; }
