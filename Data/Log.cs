@@ -11,5 +11,7 @@ namespace Data
         public DateTime TimeOfOccurrence { get; set; }
         public string Message { get; set; }
         public string UserId { get; set; }
+        public int? PatientId { get; set; }
+        public int? ProfileId { get; set; }
     }
 }

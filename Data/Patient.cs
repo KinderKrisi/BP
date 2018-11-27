@@ -9,7 +9,6 @@ namespace Data
 
         public int? Id { get; set; }
         public string UserId { get; set; }
-        public DateTimeOffset? BirthDate { get; set; }
         public string CivilRegistrationNumber { get; set; }
         public string CivilStatusCode { get; set; }
         public string CountryIdentificationCode { get; set; }

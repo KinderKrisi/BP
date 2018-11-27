@@ -2,7 +2,6 @@ import { Address } from "../address";
 import { PatientName } from "../patientName";
 
 export class PatientVM {
-	birthDate: Date;
 	civilRegistrationNumber: string;
 	civilStatusCode: string;
 	civilSubstituteNumberNational: string;
@@ -20,8 +19,7 @@ export class PatientVM {
 	socialDistrictCode: string;
 	socialDistrictText: string;
 	statusCode: string;
-    statusDate: Date;
     
-    address: Address;
-    patientName: PatientName;
+    address: Address = new Address();
+    patientName: PatientName = new PatientName();
 }

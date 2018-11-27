@@ -84,6 +84,7 @@ export class OpenIdConnectService {
   };
 
   private isAdmin() : void{
+    if(this.currentUser)
       this.userDataService.setIsAdmin(this.adminRolesList.includes(this.currentUser.profile.role));
   }
 }

@@ -44,7 +44,10 @@ namespace Repositories
                 Severity = logVM.Severity,
                 Message = logVM.Message,
                 UserId = userId,
-                TimeOfOccurrence = DateTime.Now
+                TimeOfOccurrence = DateTime.Now,
+                PatientId = logVM.PatientId,
+                ProfileId = logVM.ProfileId
+                
             };
 
             _context.Logs.Add(newLog);

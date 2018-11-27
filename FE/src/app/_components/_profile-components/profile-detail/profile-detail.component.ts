@@ -4,6 +4,9 @@ import { HospitalProfile } from 'src/app/_models/hospitalProfile';
 import { ProfileDataService } from 'src/app/_services/_data-services/profile-data/profile-data.service';
 import { UserDataService } from 'src/app/_services/_data-services/user-data/user-data.service';
 import { ProfileService } from 'src/app/_services/profile/profile.service';
+import { ToastService } from 'src/app/_services/toast/toast.service';
+import { LogVM } from 'src/app/_models/_viewModels/logVM';
+import { LogService } from 'src/app/_services/log/log.service';
 
 @Component({
   selector: 'app-profile-detail',
@@ -22,7 +25,9 @@ export class ProfileDetailComponent implements OnInit {
     private profileDataService: ProfileDataService,
     private userDataService: UserDataService,
     private profileService: ProfileService,
-    private router: Router
+    private router: Router,
+    private toastService : ToastService,
+    private logService : LogService
     ) {
 
    }
@@ -30,7 +35,18 @@ export class ProfileDetailComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.params.subscribe( x => this.profileId = x.id);
     this.profile = this.profileDataService.findProfileInList(this.profileId);
-    console.log(this.profile);
+    if(!this.profile) {
+      let severity = "error";
+      let message = "Profile can't be loaded"
+      this.toastService.toastMessage(severity, message, "There was an error retrieving the Profile Data");
+      let newLog : LogVM = {
+        message: message,
+        severity: severity,
+        profileId: this.profileId
+      }
+      this.logService.AddLog(newLog)
+      this.router.navigate(['/patients'])
+    }
     this.isAdmin = this.userDataService.getIsAdmin();
   }
   deleteProfile() : void {

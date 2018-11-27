@@ -4,6 +4,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PatientService } from 'src/app/_services/patient/patient.service';
 import { PatientDataService } from 'src/app/_services/_data-services/patient-data/patient-data.service';
 import { UserDataService } from 'src/app/_services/_data-services/user-data/user-data.service';
+import { ToastService } from 'src/app/_services/toast/toast.service';
+import { LogService } from 'src/app/_services/log/log.service';
+import { LogVM } from 'src/app/_models/_viewModels/logVM';
 
 @Component({
   selector: 'app-patient-detail',
@@ -22,12 +25,28 @@ export class PatientDetailComponent implements OnInit {
     private patientService: PatientService, 
     private router: Router,
     private patientDataService: PatientDataService,
-    private userDataService: UserDataService) {
+    private userDataService: UserDataService,
+    private toastService : ToastService,
+    private logService : LogService) {
    }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe( x => this.patientId = x.id);
     this.patient = this.patientDataService.findPatientInList(this.patientId);
+    if(!this.patient) {
+      let severity = "error";
+      let message = "Patient can't be loaded"
+      this.toastService.toastMessage(severity, message, "There was an error retrieving the Patient Data");
+      let newLog : LogVM = {
+        message: message,
+        severity: severity,
+        patientId: this.patientId
+      }
+
+      
+      this.logService.AddLog()
+      this.router.navigate(['/patients'])
+    }
     this.isAdmin = this.userDataService.getIsAdmin();
     console.log(this.patient)
   }

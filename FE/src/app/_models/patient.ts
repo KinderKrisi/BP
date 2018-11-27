@@ -5,7 +5,6 @@ export class Patient {
     id: number;
     userId: string;
 
-	birthDate: Date;
 	civilRegistrationNumber: string;
 	civilStatusCode: string;
 	civilSubstituteNumberNational: string;
@@ -23,7 +22,6 @@ export class Patient {
 	socialDistrictCode: string;
 	socialDistrictText: string;
 	statusCode: string;
-    statusDate: Date;
     
     address: Address;
     patientName: PatientName;

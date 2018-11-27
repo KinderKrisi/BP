@@ -14,8 +14,7 @@
           <span class="ui-inputgroup-addon">
             <i class="fa fa-user"></i>
           </span>
-          <input type="text" name="middleName" pInputText placeholder="Middle name of patient" [(ngModel)]="newPatient.patientName.middleName"
-            required />
+          <input type="text" name="middleName" pInputText placeholder="Middle name of patient" [(ngModel)]="newPatient.patientName.middleName"/>
         </div>
         <div class="ui-inputgroup ui-g-12">
           <span class="ui-inputgroup-addon">
@@ -24,7 +23,7 @@
           <input type="text" name="lastName" pInputText placeholder="Last name of patient" [(ngModel)]="newPatient.patientName.lastName"
             required />
         </div>
-      </div>
+      </div>       
       <div class="Address">
         <div class="ui-inputgroup ui-g-12">
           <span class="ui-inputgroup-addon">
@@ -92,115 +91,130 @@
       </div>
 
       <div class="Additional info">
-          <div class="ui-inputgroup ui-g-12">
-              <span class="ui-inputgroup-addon">
-                <i class="fa fa-user"></i>
-              </span>
-              <input type="text" name="civilRegistrationNumber" pInputText placeholder="civil registrationNumber" [(ngModel)]="newPatient.civilRegistrationNumber"
-                required />
-            </div>
-            <div class="ui-inputgroup ui-g-12">
-                <span class="ui-inputgroup-addon">
-                  <i class="fa fa-user"></i>
-                </span>
-                <input type="text" name="civilStatusCode" pInputText placeholder="civil statusCode" [(ngModel)]="newPatient.civilStatusCode"
-                  required />
-              </div>
-              <div class="ui-inputgroup ui-g-12">
-                  <span class="ui-inputgroup-addon">
-                    <i class="fa fa-user"></i>
-                  </span>
-                  <input type="text" name="civilSubstituteNumberNational" pInputText placeholder="civil substitute number national" [(ngModel)]="newPatient.civilSubstituteNumberNational"
-                    required />
-                </div>
-                <div class="ui-inputgroup ui-g-12">
-                    <span class="ui-inputgroup-addon">
-                      <i class="fa fa-user"></i>
-                    </span>
-                    <input type="text" name="countryIdentificationCode" pInputText placeholder="country identification code" [(ngModel)]="newPatient.countryIdentificationCode"
-                      required />
-                  </div>
-                  <div class="ui-inputgroup ui-g-12">
-                      <span class="ui-inputgroup-addon">
-                        <i class="fa fa-user"></i>
-                      </span>
-                      <input type="text" name="countryIdentificationCodeSST" pInputText placeholder="country identification code SST" [(ngModel)]="newPatient.countryIdentificationCodeSST"
-                        required />
-                    </div>
-                    <div class="ui-inputgroup ui-g-12">
-                        <span class="ui-inputgroup-addon">
-                          <i class="fa fa-user"></i>
-                        </span>
-                        <input type="text" name="countryIdentificationText" pInputText placeholder="country identification text" [(ngModel)]="newPatient.countryIdentificationText"
-                          required />
-                      </div>
-                      <div class="ui-inputgroup ui-g-12">
-                          <span class="ui-inputgroup-addon">
-                            <i class="fa fa-user"></i>
-                          </span>
-                          <input type="text" name="parishDistrictCode" pInputText placeholder="parish district code" [(ngModel)]="newPatient.parishDistrictCode"
-                            required />
-                        </div>
-                        <div class="ui-inputgroup ui-g-12">
-                            <span class="ui-inputgroup-addon">
-                              <i class="fa fa-user"></i>
-                            </span>
-                            <input type="text" name="parishDistrictText" pInputText placeholder="parish district text" [(ngModel)]="newPatient.parishDistrictText"
-                              required />
-                          </div>
-                          <div class="ui-inputgroup ui-g-12">
-                              <span class="ui-inputgroup-addon">
-                                <i class="fa fa-user"></i>
-                              </span>
-                              <input type="text" name="personGenderCode" pInputText placeholder="person gender code" [(ngModel)]="newPatient.personGenderCode"
-                                required />
-                            </div>
-                            <div class="ui-inputgroup ui-g-12">
-                                <span class="ui-inputgroup-addon">
-                                  <i class="fa fa-user"></i>
-                                </span>
-                                <input type="text" name="populationDistrictCode" pInputText placeholder="population district code" [(ngModel)]="newPatient.populationDistrictCode"
-                                  required />
-                              </div>
-                              <div class="ui-inputgroup ui-g-12">
-                                  <span class="ui-inputgroup-addon">
-                                    <i class="fa fa-user"></i>
-                                  </span>
-                                  <input type="text" name="populationDistrictText" pInputText placeholder="population district text" [(ngModel)]="newPatient.populationDistrictText"
-                                    required />
-                                </div>
-                                <div class="ui-inputgroup ui-g-12">
-                                    <span class="ui-inputgroup-addon">
-                                      <i class="fa fa-user"></i>
-                                    </span>
-                                    <input type="text" name="practitionerIdentificationCode" pInputText placeholder="practitioner identification code" [(ngModel)]="newPatient.practitionerIdentificationCode"
-                                      required />
-                                  </div>
-                                  <div class="ui-inputgroup ui-g-12">
-                                      <span class="ui-inputgroup-addon">
-                                        <i class="fa fa-user"></i>
-                                      </span>
-                                      <input type="text" name="regionalCode" pInputText placeholder="regional code" [(ngModel)]="newPatient.regionalCode"
-                                        required />
-                                    </div>
-                                    <div class="ui-inputgroup ui-g-12">
-                                        <span class="ui-inputgroup-addon">
-                                          <i class="fa fa-user"></i>
-                                        </span>
-                                        <input type="text" name="regionalName" pInputText placeholder="regional name" [(ngModel)]="newPatient.regionalName"
-                                          required />
-                                      </div>
+        <div class="ui-inputgroup ui-g-12">
+          <span class="ui-inputgroup-addon">
+            <i class="fa fa-user"></i>
+          </span>
+          <input type="text" name="civilRegistrationNumber" pInputText placeholder="civil registrationNumber"
+            [(ngModel)]="newPatient.civilRegistrationNumber" required />
+        </div>
+        <div class="ui-inputgroup ui-g-12">
+          <span class="ui-inputgroup-addon">
+            <i class="fa fa-user"></i>
+          </span>
+          <input type="text" name="civilStatusCode" pInputText placeholder="civil statusCode" [(ngModel)]="newPatient.civilStatusCode"
+            required />
+        </div>
+        <div class="ui-inputgroup ui-g-12">
+          <span class="ui-inputgroup-addon">
+            <i class="fa fa-user"></i>
+          </span>
+          <input type="text" name="civilSubstituteNumberNational" pInputText placeholder="civil substitute number national"
+            [(ngModel)]="newPatient.civilSubstituteNumberNational" required />
+        </div>
+        <div class="ui-inputgroup ui-g-12">
+          <span class="ui-inputgroup-addon">
+            <i class="fa fa-user"></i>
+          </span>
+          <input type="text" name="countryIdentificationCode" pInputText placeholder="country identification code"
+            [(ngModel)]="newPatient.countryIdentificationCode" required />
+        </div>
+        <div class="ui-inputgroup ui-g-12">
+          <span class="ui-inputgroup-addon">
+            <i class="fa fa-user"></i>
+          </span>
+          <input type="text" name="countryIdentificationCodeSST" pInputText placeholder="country identification code SST"
+            [(ngModel)]="newPatient.countryIdentificationCodeSST" required />
+        </div>
+        <div class="ui-inputgroup ui-g-12">
+          <span class="ui-inputgroup-addon">
+            <i class="fa fa-user"></i>
+          </span>
+          <input type="text" name="countryIdentificationText" pInputText placeholder="country identification text"
+            [(ngModel)]="newPatient.countryIdentificationText" required />
+        </div>
+        <div class="ui-inputgroup ui-g-12">
+          <span class="ui-inputgroup-addon">
+            <i class="fa fa-user"></i>
+          </span>
+          <input type="text" name="parishDistrictCode" pInputText placeholder="parish district code" [(ngModel)]="newPatient.parishDistrictCode"
+            required />
+        </div>
+        <div class="ui-inputgroup ui-g-12">
+          <span class="ui-inputgroup-addon">
+            <i class="fa fa-user"></i>
+          </span>
+          <input type="text" name="parishDistrictText" pInputText placeholder="parish district text" [(ngModel)]="newPatient.parishDistrictText"
+            required />
+        </div>
+        <div class="ui-inputgroup ui-g-12">
+          <span class="ui-inputgroup-addon">
+            <i class="fa fa-user"></i>
+          </span>
+          <input type="text" name="personGenderCode" pInputText placeholder="person gender code" [(ngModel)]="newPatient.personGenderCode"
+            required />
+        </div>
+        <div class="ui-inputgroup ui-g-12">
+          <span class="ui-inputgroup-addon">
+            <i class="fa fa-user"></i>
+          </span>
+          <input type="text" name="populationDistrictCode" pInputText placeholder="population district code"
+            [(ngModel)]="newPatient.populationDistrictCode" required />
+        </div>
+        <div class="ui-inputgroup ui-g-12">
+          <span class="ui-inputgroup-addon">
+            <i class="fa fa-user"></i>
+          </span>
+          <input type="text" name="populationDistrictText" pInputText placeholder="population district text"
+            [(ngModel)]="newPatient.populationDistrictText" required />
+        </div>
+        <div class="ui-inputgroup ui-g-12">
+          <span class="ui-inputgroup-addon">
+            <i class="fa fa-user"></i>
+          </span>
+          <input type="text" name="practitionerIdentificationCode" pInputText placeholder="practitioner identification code"
+            [(ngModel)]="newPatient.practitionerIdentificationCode" required />
+        </div>
+        <div class="ui-inputgroup ui-g-12">
+          <span class="ui-inputgroup-addon">
+            <i class="fa fa-user"></i>
+          </span>
+          <input type="text" name="regionalCode" pInputText placeholder="regional code" [(ngModel)]="newPatient.regionalCode"
+            required />
+        </div>
+        <div class="ui-inputgroup ui-g-12">
+          <span class="ui-inputgroup-addon">
+            <i class="fa fa-user"></i>
+          </span>
+          <input type="text" name="regionalName" pInputText placeholder="regional name" [(ngModel)]="newPatient.regionalName"
+            required />
+        </div>
+        <div class="ui-inputgroup ui-g-12">
+          <span class="ui-inputgroup-addon">
+            <i class="fa fa-user"></i>
+          </span>
+          <input type="text" name="socialDistrictCode" pInputText placeholder="social district code" [(ngModel)]="newPatient.socialDistrictCode"
+            required />
+        </div>
+        <div class="ui-inputgroup ui-g-12">
+          <span class="ui-inputgroup-addon">
+            <i class="fa fa-user"></i>
+          </span>
+          <input type="text" name="socialDistrictText" pInputText placeholder="social district text" [(ngModel)]="newPatient.socialDistrictText"
+            required />
+        </div>
+        <div class="ui-inputgroup ui-g-12">
+          <span class="ui-inputgroup-addon">
+            <i class="fa fa-user"></i>
+          </span>
+          <input type="text" name="statusCode" pInputText placeholder="status code" [(ngModel)]="newPatient.statusCode"
+            required />
+        </div>
 
       </div>
 
       <div class="ui-inputgroup ui-g-12">
-        <span class="ui-inputgroup-addon">
-          <i class="fa fa-home"></i>
-        </span>
-        <input type="text" name="address" placeholder="Address" [(ngModel)]="newPatient.address" required />
-      </div>
-      <div class="ui-inputgroup ui-g-12">
-        <button pButton type="button" [disabled]="loading" class="ui-button-raised ui-button-rounded" label="Create"
+        <button pButton type="button" class="ui-button-raised ui-button-rounded" label="Create"
           (click)="onSubmit($event)"></button>
       </div>
     </form>

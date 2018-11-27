@@ -10,7 +10,7 @@
       <th>Detail</th>
       <th>Delete</th>
     </tr>
-    <tr *ngFor="let profile of userProfileList" (click)="navigateToDetail(profile.id)">
+    <tr *ngFor="let profile of userProfileList">
       <td>{{profile.nameOfHospital}}</td>
       <td colspan="3">{{profile.address}}</td>
       <td>{{profile.rate}}</td>
@@ -35,7 +35,7 @@
         <th>Detail</th>
         <th>Delete</th>
       </tr>
-      <tr class="data" *ngFor="let profile of adminProfileList" (click)="navigateToDetail(profile.id)">
+      <tr class="data" *ngFor="let profile of adminProfileList">
         <td>{{profile.nameOfHospital}}</td>
         <td colspan="3">{{profile.address}}</td>
         <td>{{profile.rate}}</td>

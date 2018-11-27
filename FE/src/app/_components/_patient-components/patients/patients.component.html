@@ -1,7 +1,7 @@
 
   <div class="container ui-g ui-fluid dataTable">
     <p-card class="ui-g-6 ui-g-nopad">
-    <button (click)="getUsersPatients()"> Refresh User Profiles</button>
+    <button (click)="getUsersPatients()"> Refresh User Patients</button>
     <table>
         <tr>
           <th>Name</th>
@@ -24,7 +24,7 @@
       </table>
       </p-card>
       <p-card *ngIf="isAdmin" class="ui-g-6 ui-g-nopad">
-          <button (click)="getAdminPatients()"> Refresh Admin Profiles</button>
+          <button (click)="getAdminPatients()"> Refresh Admin Patients</button>
           <table>
               <tr>
                 <th>Name</th>
@@ -33,7 +33,7 @@
                 <th>Detail</th>
                 <th>Delete</th>
               </tr>
-              <tr *ngFor="let patient of patientList" (click)="navigateToDetail(patient.id)">
+              <tr *ngFor="let patient of patientList">
                 <td>{{patient.name}}</td>
                 <td colspan="3">{{patient.address}}</td>
                 <td colspan="2">{{patient.userId}}</td>

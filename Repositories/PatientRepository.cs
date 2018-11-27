@@ -34,7 +34,6 @@ namespace Repositories
             {
                 UserId = UserId,
                 Address = newPatientVM.Address,
-                BirthDate = newPatientVM.BirthDate,
                 CivilRegistrationNumber = newPatientVM.CivilRegistrationNumber,
                 CivilStatusCode = newPatientVM.CivilStatusCode,
                 CountryIdentificationCode = newPatientVM.CountryIdentificationCode,

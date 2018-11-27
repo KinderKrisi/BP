@@ -16,6 +16,7 @@ export class NavbarComponent implements OnInit {
   }
 
   logout() {
+    console.log("safsdfs")
     this.openIdConnectService.triggerSignOut();
   }
 }

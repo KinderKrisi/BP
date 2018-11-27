@@ -17,6 +17,7 @@ export class CreatePatientComponent implements OnInit {
 
   ngOnInit() {
     this.newPatient = new PatientVM();
+    console.log(this.newPatient);
   }
 
   onSubmit() {
@@ -31,6 +32,10 @@ export class CreatePatientComponent implements OnInit {
   }
     
   private createPatient(newPatient: PatientVM) : void {
+    console.log(" new Patient",newPatient);
     this.patientService.createPatient(newPatient).subscribe(() => this.router.navigate(["/home"]));
+  }
+  showDate(date : Date) {
+    console.log(date);
   }
 }

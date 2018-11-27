@@ -6,7 +6,6 @@ namespace Data.ViewModels
 {
     public class PatientVM
     {
-        public DateTimeOffset? BirthDate { get; set; }
         public string CivilRegistrationNumber { get; set; }
         public string CivilStatusCode { get; set; }
         public string CountryIdentificationCode { get; set; }

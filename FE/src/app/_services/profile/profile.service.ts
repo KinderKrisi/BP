@@ -26,7 +26,7 @@ export class ProfileService {
     return this.http.post<HospitalProfile>(this.profileUrl + "/CreateProfile", createProfile).pipe(
       tap(newProfile => this.profileDataService.pushToUserProfileList(newProfile)),
       catchError(x => {
-        this.toastService.toastMessage("Error", "Create profile", x.error.msg[0]);
+        this.toastService.toastMessage("error", "Create profile", x.error.msg[0]);
         return throwError(x);
       })
     )
@@ -46,7 +46,7 @@ export class ProfileService {
     return this.http.delete<void>(this.profileUrl + `/DeleteProfile/${id}`).pipe(
       tap(() => this.profileDataService.deleteProfileFromList(id)),
       catchError(x => {
-        this.toastService.toastMessage("Error", "Delete profile", x.error.msg[0]);
+        this.toastService.toastMessage("error", "Delete profile", x.error.msg[0]);
         return throwError(x);
       })
     )
@@ -54,7 +54,7 @@ export class ProfileService {
   deleteProfileAdmin(id: number) : Observable<void> {
     return this.http.delete<void>(this.profileUrl + `/DeleteProfileAdmin/${id}`).pipe(
       catchError(x => {
-        this.toastService.toastMessage("Error", "Delete profile admin", x.error.msg[0]);
+        this.toastService.toastMessage("error", "Delete profile admin", x.error.msg[0]);
         return throwError(x);
       })
     )

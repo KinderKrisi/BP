@@ -11,6 +11,7 @@ import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { CardModule } from 'primeng/card';
+import { CalendarModule} from 'primeng/calendar';
 
 
 //Routes
@@ -43,6 +44,7 @@ import { ToastService } from './_services/toast/toast.service';
 import { UserDataService } from './_services/_data-services/user-data/user-data.service';
 import { ProfileDataService } from './_services/_data-services/profile-data/profile-data.service';
 import { PatientDataService } from './_services/_data-services/patient-data/patient-data.service';
+import { LogService } from './_services/log/log.service';
 
 @NgModule({
   declarations: [
@@ -68,7 +70,8 @@ import { PatientDataService } from './_services/_data-services/patient-data/pati
     ButtonModule,
     BrowserAnimationsModule,
     InputSwitchModule,
-    CardModule
+    CardModule,
+    CalendarModule
   ],
   providers: [
     AddAuthorizationHeaderInterceptorProvider,
@@ -80,7 +83,8 @@ import { PatientDataService } from './_services/_data-services/patient-data/pati
     ToastService,
     UserDataService,
     ProfileDataService,
-    PatientDataService
+    PatientDataService,
+    LogService
   ],
   bootstrap: [AppComponent]
 })
