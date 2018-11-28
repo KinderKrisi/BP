@@ -44,7 +44,7 @@ import { ToastService } from './_services/toast/toast.service';
 import { UserDataService } from './_services/_data-services/user-data/user-data.service';
 import { ProfileDataService } from './_services/_data-services/profile-data/profile-data.service';
 import { PatientDataService } from './_services/_data-services/patient-data/patient-data.service';
-import { LogService } from './_services/log/log.service';
+import { LogsendService } from './_services/logSend/logsend.service';
 
 @NgModule({
   declarations: [
@@ -84,7 +84,7 @@ import { LogService } from './_services/log/log.service';
     UserDataService,
     ProfileDataService,
     PatientDataService,
-    LogService
+    LogsendService
   ],
   bootstrap: [AppComponent]
 })

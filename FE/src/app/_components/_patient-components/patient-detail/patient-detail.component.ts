@@ -5,8 +5,8 @@ import { PatientService } from 'src/app/_services/patient/patient.service';
 import { PatientDataService } from 'src/app/_services/_data-services/patient-data/patient-data.service';
 import { UserDataService } from 'src/app/_services/_data-services/user-data/user-data.service';
 import { ToastService } from 'src/app/_services/toast/toast.service';
-import { LogService } from 'src/app/_services/log/log.service';
 import { LogVM } from 'src/app/_models/_viewModels/logVM';
+import { LogsendService } from 'src/app/_services/logSend/logsend.service';
 
 @Component({
   selector: 'app-patient-detail',
@@ -27,7 +27,7 @@ export class PatientDetailComponent implements OnInit {
     private patientDataService: PatientDataService,
     private userDataService: UserDataService,
     private toastService : ToastService,
-    private logService : LogService) {
+    private logService : LogsendService) {
    }
 
   ngOnInit() {
@@ -42,9 +42,7 @@ export class PatientDetailComponent implements OnInit {
         severity: severity,
         patientId: this.patientId
       }
-
-      
-      this.logService.AddLog()
+      this.logService.AddLog(newLog).subscribe();
       this.router.navigate(['/patients'])
     }
     this.isAdmin = this.userDataService.getIsAdmin();

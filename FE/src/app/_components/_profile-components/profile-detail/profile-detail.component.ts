@@ -6,7 +6,7 @@ import { UserDataService } from 'src/app/_services/_data-services/user-data/user
 import { ProfileService } from 'src/app/_services/profile/profile.service';
 import { ToastService } from 'src/app/_services/toast/toast.service';
 import { LogVM } from 'src/app/_models/_viewModels/logVM';
-import { LogService } from 'src/app/_services/log/log.service';
+import { LogsendService } from 'src/app/_services/logSend/logsend.service';
 
 @Component({
   selector: 'app-profile-detail',
@@ -27,7 +27,7 @@ export class ProfileDetailComponent implements OnInit {
     private profileService: ProfileService,
     private router: Router,
     private toastService : ToastService,
-    private logService : LogService
+    private logService : LogsendService
     ) {
 
    }
@@ -44,7 +44,7 @@ export class ProfileDetailComponent implements OnInit {
         severity: severity,
         profileId: this.profileId
       }
-      this.logService.AddLog(newLog)
+      this.logService.AddLog(newLog).subscribe();
       this.router.navigate(['/patients'])
     }
     this.isAdmin = this.userDataService.getIsAdmin();
