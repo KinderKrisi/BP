@@ -125,5 +125,21 @@ namespace Repositories
                 return false;
             }
         }
+
+        public async Task<Patient> UpdatePatient(Patient updatedPatient)
+        {
+            try
+            {
+                var patientToUpdate = await _context.Patients.FirstOrDefaultAsync(x => x.Id == updatedPatient.Id);
+                patientToUpdate = updatedPatient;
+                await _context.SaveChangesAsync();
+                return patientToUpdate;
+            }
+            catch (Exception ex)
+            {
+                await _logRepository.AddLog(UserId, ex.Message, updatedPatient.Id, true);
+                return null;
+            }
+        }
     }
 }

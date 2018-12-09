@@ -119,5 +119,21 @@ namespace Repositories
                 return null;
             }
         }
+
+        public async Task<HospitalProfile> UpdateProfile(HospitalProfile updatedProfile)
+        {
+            try
+            {
+                var profileToUpdate = await _context.Profiles.FirstOrDefaultAsync(x => x.Id == updatedProfile.Id);
+                profileToUpdate = updatedProfile;
+                await _context.SaveChangesAsync();
+                return profileToUpdate;
+            }
+            catch (Exception ex)
+            {
+                await _logRepository.AddLog(UserId, ex.Message, updatedProfile.Id, false);
+                return null;
+            }
+        }
     }
 }

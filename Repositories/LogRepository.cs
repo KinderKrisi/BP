@@ -31,8 +31,22 @@ namespace Repositories
                 TimeOfOccurrence = DateTime.Now
             };
 
-            _context.Logs.Add(newLog);
-            await _context.SaveChangesAsync();
+            await StoreToDb(newLog);
+        }
+        public async Task AddLog(string userId, string message, int? id, bool isPatient)
+        {
+            var newLog = new Log()
+            {
+                Severity = "error",
+                Message = message,
+                UserId = userId,
+                TimeOfOccurrence = DateTime.Now
+            };
+
+            if (isPatient) newLog.PatientId = id;
+            else newLog.ProfileId = id;
+
+            await StoreToDb(newLog);
         }
 
         public async Task AddLogFE(LogVM logVM)
@@ -50,6 +64,10 @@ namespace Repositories
                 
             };
 
+            await StoreToDb(newLog);
+        }
+        private async Task StoreToDb(Log newLog)
+        {
             _context.Logs.Add(newLog);
             await _context.SaveChangesAsync();
         }

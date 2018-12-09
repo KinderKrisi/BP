@@ -52,5 +52,16 @@ export class ProfileDetailComponent implements OnInit {
   deleteProfile() : void {
     this.profileService.deleteProfile(this.profile.id).subscribe( () => this.router.navigate(["/home"]));
   }
+  onSubmit() {
 
+    if(this.profile){
+      this.updateProfile(this.profile);
+    }
+    else{
+      return;
+    }
+  }
+  private updateProfile(profile: HospitalProfile) : void {
+    this.profileService.updateProfile(profile).subscribe();
+  }
 }

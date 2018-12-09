@@ -29,11 +29,21 @@ export class ProfileDataService {
       this.userProfileList = this.userProfileList.filter(x => x.id != id);
       return this.userProfileList;
     }
+    adminDeleteProfileFromList(id: number) : HospitalProfile[] {
+      this.adminProfileList = this.adminProfileList.filter(x => x.id != id);
+      return this.adminProfileList;
+    }
     adminSetProfileList(list: HospitalProfile[]): void {
       this.adminProfileList = list;
     }
     adminGetProfileList() : HospitalProfile[] {
       return this.adminProfileList;
+    }
+    updateProfile(updatedProfile: HospitalProfile) : void {
+      let dummy1 = this.userProfileList.find(x => x.id == updatedProfile.id);
+      if(dummy1) dummy1 = updatedProfile;
+      let dummy2 = this.adminProfileList.find(x => x.id == updatedProfile.id);
+      if(dummy2) dummy2 = updatedProfile;
     }
   
 }

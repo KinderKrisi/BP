@@ -33,4 +33,10 @@ export class PatientDataService {
   deletePatientFromList(patientId: number) {
     this.userPatientList = this.userPatientList.filter(x => x.id !== patientId)
   }
+  updatePatient(updatedPatient: Patient) : void {
+    let dummy1 = this.userPatientList.find(x => x.id == updatedPatient.id);
+    if(dummy1) dummy1 = updatedPatient;
+    let dummy2 = this.adminPatientList.find(x => x.id == updatedPatient.id);
+    if(dummy2) dummy2 = updatedPatient;
+  }
 }

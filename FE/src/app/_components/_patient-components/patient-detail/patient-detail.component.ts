@@ -5,8 +5,8 @@ import { PatientService } from 'src/app/_services/patient/patient.service';
 import { PatientDataService } from 'src/app/_services/_data-services/patient-data/patient-data.service';
 import { UserDataService } from 'src/app/_services/_data-services/user-data/user-data.service';
 import { ToastService } from 'src/app/_services/toast/toast.service';
-import { LogVM } from 'src/app/_models/_viewModels/logVM';
 import { LogsendService } from 'src/app/_services/logSend/logsend.service';
+import { LogVM } from 'src/app/_models/_viewModels/logVM';
 
 @Component({
   selector: 'app-patient-detail',
@@ -42,7 +42,7 @@ export class PatientDetailComponent implements OnInit {
         severity: severity,
         patientId: this.patientId
       }
-      this.logService.AddLog(newLog).subscribe();
+      this.logService.AddLog(newLog)
       this.router.navigate(['/patients'])
     }
     this.isAdmin = this.userDataService.getIsAdmin();
@@ -55,5 +55,18 @@ export class PatientDetailComponent implements OnInit {
       } 
     );
   }
+  onSubmit() {
+
+    if(this.patient){
+      this.updatePatient(this.patient);
+    }
+    else{
+      return;
+    }
+  }
+  private updatePatient(patient: Patient) : void {
+    this.patientService.updatePatient(patient).subscribe();
+  }
+    
 
 }

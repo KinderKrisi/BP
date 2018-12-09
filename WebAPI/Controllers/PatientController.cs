@@ -112,5 +112,20 @@ namespace WebAPI.Controllers
 
             return Ok();
         }
+        [HttpPut("[action]")]
+        public async Task<ActionResult<Patient>> UpdatePatient(Patient updatedPatient)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var result = await _repository.UpdatePatient(updatedPatient);
+            if(result == null)
+            {
+                ModelState.AddErrorMessage("Unable to update patient");
+                return BadRequest(ModelState);
+            }
+            return Ok(result);
+        }
     }
 }

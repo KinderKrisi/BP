@@ -35,7 +35,8 @@ export class PatientService {
   }
   getAllUserPatientsAdmin() : Observable<Patient[]> {
     return this.http.get<Patient[]>(this.patientUrl + '/GetAllPatientsAdmin').pipe(
-        tap(adminPatientsList => this.patientDataService.adminSetPatientList(adminPatientsList))
+        tap(adminPatientsList => {
+          this.patientDataService.adminSetPatientList(adminPatientsList)})
         ,catchError(err => {
           this.toastService.toastMessage("error", "Get patients admin", err.error.msg[0]);
           return throwError(err)
@@ -46,7 +47,8 @@ export class PatientService {
   createPatient(patient: PatientVM) : Observable<Patient> {
     return this.http.post<Patient>(this.patientUrl + "/CreatePatient", patient).pipe(
       tap(newPatient => {
-        this.patientDataService.pushToUserPatientList(newPatient)
+        this.patientDataService.pushToUserPatientList(newPatient);
+        this.toastService.toastMessage("success", "Create patient", "Patient has been created")
       }),
         catchError(err => {
           this.toastService.toastMessage("error", "Create patient", err.error.msg[0]);
@@ -58,6 +60,7 @@ export class PatientService {
       return this.http.delete<any>(this.patientUrl + `/DeletePatient/${patientId}`).pipe(
         tap(() => {
           this.patientDataService.deletePatientFromList(patientId);
+          this.toastService.toastMessage("success", "Delete patient", "Patient has been deleted");
         }),
         catchError(err => {
           this.toastService.toastMessage("error", "Delete patient", err.error.msg[0]);
@@ -69,9 +72,22 @@ export class PatientService {
       return this.http.delete<any>(this.patientUrl + `/DeletePatientAdmin/${patientId}`).pipe(
         tap(() => {
           this.patientDataService.deletePatientFromList(patientId);
+          this.toastService.toastMessage("success", "Delete patient", "Patient has been deleted");
         }),
         catchError(err => {
           this.toastService.toastMessage("error", "Delete patient", err.error.msg[0]);
+          return throwError(err);
+        })
+      )
+    }
+    updatePatient(updatedPatient: Patient) : Observable<Patient> {
+      return this.http.put<Patient>(this.patientUrl + "/UpdatePatient", updatedPatient).pipe(
+        tap((result) =>{
+          this.patientDataService.updatePatient(result);
+          this.toastService.toastMessage("success", "Update patient", "Patient has been updated")
+        }),
+        catchError(err => {
+          this.toastService.toastMessage("error", "Update patient", err.error.msg[0]);
           return throwError(err);
         })
       )

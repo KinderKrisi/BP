@@ -14,5 +14,6 @@ namespace Repositories.Interfaces
         Task<IEnumerable<Patient>> GetAllPatientsAdmin();
         Task<bool> DeletePatient(int id);
         Task<bool> DeletePatientAdmin(int id);
+        Task<Patient> UpdatePatient(Patient updatedPatient);
     }
 }

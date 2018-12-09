@@ -44,7 +44,10 @@ export class ProfileService {
 
   deleteProfile(id: number) : Observable<void> {
     return this.http.delete<void>(this.profileUrl + `/DeleteProfile/${id}`).pipe(
-      tap(() => this.profileDataService.deleteProfileFromList(id)),
+      tap(() => {
+        this.profileDataService.deleteProfileFromList(id);
+        this.toastService.toastMessage("success", "Delete profile", "Profile has been deleted");
+      }),
       catchError(x => {
         this.toastService.toastMessage("error", "Delete profile", x.error.msg[0]);
         return throwError(x);
@@ -53,9 +56,25 @@ export class ProfileService {
   }
   deleteProfileAdmin(id: number) : Observable<void> {
     return this.http.delete<void>(this.profileUrl + `/DeleteProfileAdmin/${id}`).pipe(
+      tap(() => {
+        this.profileDataService.adminDeleteProfileFromList(id);
+        this.toastService.toastMessage("success", "Delete Profile", "Profile has been deleted")
+      }),
       catchError(x => {
         this.toastService.toastMessage("error", "Delete profile admin", x.error.msg[0]);
         return throwError(x);
+      })
+    )
+  }
+  updateProfile(updatedProfile: HospitalProfile) : Observable<HospitalProfile> {
+    return this.http.put<HospitalProfile>(this.profileUrl + "/UpdateProfile", updatedProfile).pipe(
+      tap((result) =>{
+        this.profileDataService.updateProfile(result);
+        this.toastService.toastMessage("success", "Update profile", "Profile has been updated")
+      }),
+      catchError(err => {
+        this.toastService.toastMessage("error", "Update profile", err.error.msg[0]);
+        return throwError(err);
       })
     )
   }

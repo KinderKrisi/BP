@@ -10,6 +10,7 @@ namespace Repositories.Interfaces
     public interface ILogRepository
     {
         Task AddLog(string userId, string message);
+        Task AddLog(string userId, string message, int? id, bool isPatient);
         Task AddLogFE(LogVM log);
     }
 }

@@ -14,5 +14,6 @@ namespace Repositories.Interfaces
         Task<IEnumerable<HospitalProfile>> GetAllProfiles();
         Task<bool> DeleteProfile(int id);
         Task<bool> DeleteProfileAdmin(int id);
+        Task<HospitalProfile> UpdateProfile(HospitalProfile updatedProfile);
     }
 }

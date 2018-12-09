@@ -100,5 +100,20 @@ namespace WebAPI.Controllers
             }
             return Ok();
         }
+        [HttpPut("[action]")]
+        public async Task<ActionResult<Patient>> UpdateProfile(HospitalProfile updatedProfile)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var result = await _repository.UpdateProfile(updatedProfile);
+            if (result == null)
+            {
+                ModelState.AddErrorMessage("Unable to update profile");
+                return BadRequest(ModelState);
+            }
+            return Ok(result);
+        }
     }
 }
