@@ -53,6 +53,13 @@ namespace Repositories
 
         public async Task<bool> DeleteProfile(int id)
         {
+            if (id < 0)
+            {
+                await _logRepository.AddLog(UserId, "incorect Id");
+                return false;
+
+            }
+
             var profile = await _context.Profiles.FirstOrDefaultAsync(x => x.UserId == UserId && x.Id == id);
             if(profile != null)
             {
@@ -73,6 +80,12 @@ namespace Repositories
 
         public async Task<bool> DeleteProfileAdmin(int id)
         {
+            if(id < 0)
+            {
+                await _logRepository.AddLog(UserId, "incorect Id");
+                return false;
+
+            }
             var profile = await _context.Profiles.FirstOrDefaultAsync(x => x.Id == id);
             if (profile != null)
             {

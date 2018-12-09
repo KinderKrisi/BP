@@ -96,6 +96,13 @@ namespace Repositories
 
         public async Task<bool> DeletePatient(int id)
         {
+            if (id < 0)
+            {
+                await _logRepository.AddLog(UserId, "incorect Id");
+                return false;
+
+            }
+
             try
             {
                 var userToDelete = await _context.Patients.FirstOrDefaultAsync(x => x.UserId == UserId && x.Id == id);
@@ -112,6 +119,12 @@ namespace Repositories
 
         public async Task<bool> DeletePatientAdmin(int id)
         {
+            if (id < 0)
+            {
+                await _logRepository.AddLog(UserId, "incorect Id");
+                return false;
+            }
+
             try
             {
                 var userToDelete = await _context.Patients.FirstOrDefaultAsync(x => x.Id == id);
