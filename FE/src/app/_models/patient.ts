@@ -1,9 +1,10 @@
 import { Address } from "./address";
-import { PatientName } from "./patientName";
+import { PersonName } from "./personName";
 
 export class Patient {
     id: number;
-    userId: string;
+	userId: string;
+	name? : string;
 
 	civilRegistrationNumber: string;
 	civilStatusCode: string;
@@ -24,5 +25,5 @@ export class Patient {
 	statusCode: string;
     
     address: Address;
-    patientName: PatientName;
+    patientName: PersonName;
 }

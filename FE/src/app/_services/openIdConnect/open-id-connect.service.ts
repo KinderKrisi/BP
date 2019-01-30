@@ -3,6 +3,7 @@ import { environment } from '../../../environments/environment';
 import { ReplaySubject } from 'rxjs';
 import { UserManager, User } from 'oidc-client';
 import { UserDataService } from '../_data-services/user-data/user-data.service';
+import { ToastService } from '../toast/toast.service';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,7 @@ export class OpenIdConnectService {
     return this.currentUser;
   }
 
-  constructor(private userDataService: UserDataService) {
+  constructor(private userDataService: UserDataService, private toastService: ToastService) {
     this.userManager.clearStaleState();
 
     this.userManager.events.addUserLoaded(user => {
@@ -34,6 +35,7 @@ export class OpenIdConnectService {
       this.currentUser = user;
       this.isAdmin();
       this.userLoaded$.next(true);
+      this.toastService.toastMessage("success", "Login", "Login successful")
     });
 
     this.userManager.events.addUserUnloaded((e) => {
@@ -43,8 +45,8 @@ export class OpenIdConnectService {
       this.currentUser = null;
       this.isAdmin();
       this.userLoaded$.next(false);
+      this.toastService.toastMessage("success", "Logout", "Logout successful")
     });
-
   }
 
   triggerSignIn() {

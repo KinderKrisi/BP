@@ -16,6 +16,7 @@ export class AddAuthorizationHeaderInterceptor implements HttpInterceptor {
                     + this.openIdConnectService.user.access_token
             }
         });
+        console.log("request", request);
         return next.handle(request);
     }
 }

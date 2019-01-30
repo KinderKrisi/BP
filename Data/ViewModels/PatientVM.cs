@@ -24,6 +24,6 @@ namespace Data.ViewModels
         public string StatusCode { get; set; }
 
         public Address Address { get; set; }
-        public PersonName PersonName { get; set; }
+        public PersonName PatientName { get; set; }
     }
 }

@@ -26,7 +26,7 @@ namespace Data
         public string SocialDistrictText { get; set; }
         public string StatusCode { get; set; }
 
-        public Address Address { get; set; } = new Address();
-        public PersonName PersonName { get; set; } = new PersonName();
+        public Address Address { get; set; }
+        public PersonName PatientName { get; set; }
     }
 }

@@ -26,19 +26,20 @@ export class PatientsComponent implements OnInit {
 
   ngOnInit() {
     this.isAdmin = this.userDataService.getIsAdmin();
-    this.patientService.getAllPatientsForUser().subscribe(x => this.patientList = x)
-    if(this.isAdmin) this.patientService.getAllUserPatientsAdmin().subscribe(x => this.adminPatientList = x);
+    this.patientService.getAllPatientsForUser().subscribe(x => this.patientList = x.map(x => this.nameToString(x)))
+    if(this.isAdmin) this.patientService.getAllUserPatientsAdmin().subscribe(x => x.map(x => this.nameToString(x)));
   }
   getUsersPatients() : void {
     this.patientService.getAllPatientsForUser().subscribe(x => {
-      this.patientList = x;
+      this.patientList = x.map(x => this.nameToString(x));
+      console.log("getUserPatients ", this.patientList);
       this.toastService.toastMessage("success", "Patients Refresh", "Users patients had been refreshed");
     })
   }
 
   getAdminPatients() : void {
     if(this.isAdmin) this.patientService.getAllUserPatientsAdmin().subscribe(x =>{
-       this.adminPatientList = x;
+       this.adminPatientList = x.map(x => this.nameToString(x));
        this.toastService.toastMessage("success", "Admin Patients refresh", "Admin patients had been refreshed")
     })
   }
@@ -53,6 +54,14 @@ export class PatientsComponent implements OnInit {
   navigateToDetail(id: number) : void {
     this.router.navigate(['/patient', id]);
     console.log("navigated to detail")
+  }
+
+  nameToString(patient : Patient){
+    if(patient.patientName){
+    patient.name = patient.patientName.firstName + " " + patient.patientName.lastName;
+    return patient;
+    }
+    return patient;
   }
 
 }

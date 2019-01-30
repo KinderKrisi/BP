@@ -1,5 +1,5 @@
 import { Address } from "../address";
-import { PatientName } from "../patientName";
+import { PersonName } from "../personName";
 
 export class PatientVM {
 	civilRegistrationNumber: string;
@@ -21,5 +21,5 @@ export class PatientVM {
 	statusCode: string;
     
     address: Address = new Address();
-    patientName: PatientName = new PatientName();
+    patientName: PersonName = new PersonName();
 }

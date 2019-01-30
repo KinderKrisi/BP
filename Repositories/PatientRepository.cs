@@ -42,7 +42,6 @@ namespace Repositories
                 ParishDistrictCode = newPatientVM.ParishDistrictCode,
                 ParishDistrictText = newPatientVM.ParishDistrictText,
                 PersonGenderCode = newPatientVM.PersonGenderCode,
-                PersonName = newPatientVM.PersonName,
                 PopulationDistrictCode = newPatientVM.PopulationDistrictCode,
                 PopulationDistrictText = newPatientVM.PopulationDistrictText,
                 PractitionerIdentificationCode = newPatientVM.PractitionerIdentificationCode,
@@ -50,7 +49,10 @@ namespace Repositories
                 RegionalName = newPatientVM.RegionalName,
                 SocialDistrictCode = newPatientVM.SocialDistrictCode,
                 SocialDistrictText = newPatientVM.SocialDistrictText,
-                StatusCode = newPatientVM.StatusCode
+                StatusCode = newPatientVM.StatusCode,
+                PatientName = newPatientVM.PatientName,
+
+
             };
             try
             {
@@ -70,7 +72,7 @@ namespace Repositories
         {
             try
             {
-                var userPatientList  = await _context.Patients.Where(x => x.UserId == UserId).ToListAsync();
+                var userPatientList  = await _context.Patients.Include(x => x.PatientName).Include(x =>x.PatientName).Where(x => x.UserId == UserId).ToListAsync();
                 return userPatientList;
             }
             catch (Exception ex)
@@ -84,7 +86,7 @@ namespace Repositories
         {
             try
             {
-               var userPatientListAdmin = await _context.Patients.OrderBy(x => x.UserId).ToListAsync();
+               var userPatientListAdmin = await _context.Patients.Include(x => x.PatientName).Include(x => x.PatientName).OrderBy(x => x.UserId).ToListAsync();
                 return userPatientListAdmin;
             }
             catch (Exception ex)
@@ -143,8 +145,9 @@ namespace Repositories
         {
             try
             {
-                var patientToUpdate = await _context.Patients.FirstOrDefaultAsync(x => x.Id == updatedPatient.Id);
+                var patientToUpdate = await _context.Patients.AsNoTracking().FirstOrDefaultAsync(x => x.Id == updatedPatient.Id);
                 patientToUpdate = updatedPatient;
+                _context.Patients.Update(patientToUpdate);
                 await _context.SaveChangesAsync();
                 return patientToUpdate;
             }

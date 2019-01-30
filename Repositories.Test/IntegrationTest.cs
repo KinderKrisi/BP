@@ -43,17 +43,15 @@ namespace Repositories.Test
             Assert.True(context.Profiles.FirstOrDefaultAsync(x => x.Id == 1) != null);
             Assert.True(await context.Profiles.CountAsync() == 1);
 
-
-            var resultTest1 = context.Profiles.FirstOrDefaultAsync(x => x.Address == "Address");
-
             await profileRepository.DeleteProfileAdmin(1);
             Assert.True(await context.Profiles.CountAsync() == 0);
 
             Assert.True(await context.Logs.CountAsync() == 0);
 
-            await profileRepository.DeleteProfileAdmin(-1);
+            context.Profiles.Add(dummyHospital);
+            await context.SaveChangesAsync();
 
-            var resultTest2 = context.Logs.FirstOrDefaultAsync();
+            await profileRepository.DeleteProfileAdmin(-1);
 
             Assert.True(await context.Logs.CountAsync() == 1);
         }

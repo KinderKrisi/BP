@@ -38,7 +38,10 @@ export class ProfileService {
   }
   getAllProfilesAdmin() : Observable<HospitalProfile[]>{
     return this.http.get<HospitalProfile[]>(this.profileUrl + "/GetAllProfiles").pipe(
-    tap(adminProfileList => this.profileDataService.adminSetProfileList(adminProfileList))
+    tap(adminProfileList => {
+      this.profileDataService.adminSetProfileList(adminProfileList);
+      console.log("admin profile list", adminProfileList)
+    })
     )
   }
 

@@ -137,8 +137,9 @@ namespace Repositories
         {
             try
             {
-                var profileToUpdate = await _context.Profiles.FirstOrDefaultAsync(x => x.Id == updatedProfile.Id);
+                var profileToUpdate = await _context.Profiles.AsNoTracking().FirstOrDefaultAsync(x => x.Id == updatedProfile.Id);
                 profileToUpdate = updatedProfile;
+                _context.Profiles.Update(profileToUpdate);
                 await _context.SaveChangesAsync();
                 return profileToUpdate;
             }
